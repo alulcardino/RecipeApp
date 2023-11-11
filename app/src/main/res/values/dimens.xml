@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="main_dimen">8dp</dimen>
+    <dimen name="dimen_main">8dp</dimen>
+    <dimen name="dimen_navigation_button">2dp</dimen>
 </resources>

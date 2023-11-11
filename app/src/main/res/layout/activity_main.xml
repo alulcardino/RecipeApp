@@ -6,22 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/main_dimen"
+        android:layout_marginHorizontal="@dimen/dimen_main"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-
-        <Button
-            android:id="@+id/btn_category"
-            style="@style/StyleTitle14"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCategory"
+            style="@style/StyleNavButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/main_dimen"
+            android:layout_marginStart="@dimen/dimen_main"
+            android:layout_marginEnd="@dimen/dimen_navigation_button"
             android:layout_weight="1"
             android:backgroundTint="@color/blue"
             android:text="@string/category"
@@ -29,16 +28,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/btn_favorite"
-            style="@style/StyleTitle14"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFavorite"
+            style="@style/StyleNavButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/main_dimen"
+            android:layout_marginStart="@dimen/dimen_navigation_button"
+            android:layout_marginEnd="@dimen/dimen_main"
             android:layout_weight="1"
             android:backgroundTint="@color/red"
             android:text="@string/favorite"
-            app:icon="@drawable/icon_heart"
+            app:icon="@drawable/ic_heart_empty"
             app:iconGravity="textEnd"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

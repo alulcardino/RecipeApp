@@ -9,6 +9,8 @@ class MainActivity : AppCompatActivity() {
     private val mBinding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val fragmentTransaction: android.app.FragmentTransaction? = fragmentManager.beginTransaction()
+        fragmentTransaction?.commit()
         _binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)

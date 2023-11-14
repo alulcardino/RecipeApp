@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.romanmikhailenko.recipeapp.databinding.ActivityMainBinding
 
@@ -16,9 +17,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-        val fragmentTransaction = supportFragmentManager
-        fragmentTransaction.commit {
-            add(R.id.mainContainer, CategoriesListFragment::class.java, null, "tag")
+
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            add<CategoriesListFragment>(R.id.mainContainer)
+            addToBackStack(null)
         }
     }
 }

@@ -23,5 +23,17 @@ class MainActivity : AppCompatActivity() {
             add<CategoriesListFragment>(R.id.mainContainer)
             addToBackStack(null)
         }
+
+        mBinding.btnCategory.setOnClickListener {
+            supportFragmentManager.commit {
+                replace(R.id.mainContainer, CategoriesListFragment::class.java, null)
+            }
+        }
+
+        mBinding.btnFavorite.setOnClickListener {
+            supportFragmentManager.commit {
+                replace(R.id.mainContainer, FavoritesFragment::class.java, null)
+            }
+        }
     }
 }

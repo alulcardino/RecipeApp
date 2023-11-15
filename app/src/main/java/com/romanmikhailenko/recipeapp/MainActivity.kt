@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
+import androidx.fragment.app.replace
+import com.romanmikhailenko.recipeapp.R.id.mainContainer
 import com.romanmikhailenko.recipeapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,8 +22,21 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.commit {
             setReorderingAllowed(true)
-            add<CategoriesListFragment>(R.id.mainContainer)
+            add<CategoriesListFragment>(mainContainer)
             addToBackStack(null)
+        }
+
+        mBinding.btnCategory.setOnClickListener {
+            supportFragmentManager.commit {
+                replace<FavoritesFragment>(mainContainer)
+                setReorderingAllowed(true)
+            }
+        }
+
+        mBinding.btnFavorite.setOnClickListener {
+            supportFragmentManager.commit {
+                replace<CategoriesListFragment>(mainContainer)
+                setReorderingAllowed(true)            }
         }
     }
 }

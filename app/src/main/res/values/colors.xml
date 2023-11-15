@@ -10,4 +10,5 @@
     <color name="red">#E13E3E</color>
     <color name="blue">#525DC0</color>
     <color name="status_bar">#F4FAFF</color>
+    <color name="background_favorite">#F4FAFF</color>
 </resources>

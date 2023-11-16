@@ -28,14 +28,14 @@ class MainActivity : AppCompatActivity() {
 
         mBinding.btnCategory.setOnClickListener {
             supportFragmentManager.commit {
-                replace<FavoritesFragment>(mainContainer)
+                replace<CategoriesListFragment>(mainContainer)
                 setReorderingAllowed(true)
             }
         }
 
         mBinding.btnFavorite.setOnClickListener {
             supportFragmentManager.commit {
-                replace<CategoriesListFragment>(mainContainer)
+                replace<FavoritesFragment>(mainContainer)
                 setReorderingAllowed(true)            }
         }
     }

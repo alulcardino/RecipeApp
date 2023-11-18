@@ -46,8 +46,8 @@
             style="@style/StyleText12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/dimen_second"
             android:layout_marginStart="@dimen/dimen_second"
-            android:layout_marginTop="@dimen/dimen_second"
             android:text="@string/title_category"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvCategoryName" />

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="8px" />
+    <gradient
+        android:centerColor="@color/background_favorite"
+        android:endColor="@color/background_favorite"
+        android:startColor="@color/background_favorite" />
+</shape>

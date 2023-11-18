@@ -12,4 +12,5 @@
     <color name="status_bar">#F4FAFF</color>
     <color name="background_favorite">#F4FAFF</color>
     <color name="title_category">#5F3678</color>
+    <color name="grey">#666666</color>
 </resources>

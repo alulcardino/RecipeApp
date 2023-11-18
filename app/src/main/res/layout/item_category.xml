@@ -1,12 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvCategoryItem"
     android:layout_width="match_parent"
     android:layout_height="220dp"
     android:layout_marginHorizontal="@dimen/dimen_second"
     android:layout_marginTop="@dimen/dimen_main"
     android:clickable="true"
     android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:id="@+id/ivCategoryItem"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/burger"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCategoryName"
+            style="@style/StyleTitle16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_second"
+            android:layout_marginTop="@dimen/dimen_second"
+            android:text="@string/title_category"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivCategoryItem" />
+
+        <TextView
+            android:id="@+id/tvCategoryDescription"
+            style="@style/StyleText12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_second"
+            android:layout_marginTop="@dimen/dimen_second"
+            android:text="@string/title_category"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCategoryName" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

@@ -36,7 +36,8 @@ class MainActivity : AppCompatActivity() {
         mBinding.btnFavorite.setOnClickListener {
             supportFragmentManager.commit {
                 replace<FavoritesFragment>(mainContainer)
-                setReorderingAllowed(true)            }
+                setReorderingAllowed(true)
+            }
         }
     }
 }

@@ -32,7 +32,6 @@
         <item name="android:textSize">20sp</item>
         <item name="android:fontFamily">@font/montserrat_alternates_medium</item>
         <item name="android:textAllCaps">true</item>
-        android:textColor="#5F3678"
         <item name="android:textColor">@color/title_category_color</item>
     </style>
 </resources>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="220dp"
     android:layout_marginHorizontal="@dimen/dimen_second"
-    android:layout_marginTop="@dimen/dimen_second"
+    android:layout_marginTop="@dimen/dimen_main"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"

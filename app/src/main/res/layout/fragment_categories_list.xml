@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="@dimen/dimen_second"
-            android:layout_marginTop="@dimen/dimen_main"
+            android:layout_marginTop="@dimen/dimen_second"
             android:layout_marginBottom="@dimen/dimen_second"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"

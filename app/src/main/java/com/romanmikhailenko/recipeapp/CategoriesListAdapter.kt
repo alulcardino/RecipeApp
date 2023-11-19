@@ -16,8 +16,8 @@ import java.lang.Exception
 
 
 class CategoriesListAdapter(
-    val dataSet: List<Category>,
-    val fragment: CategoriesListFragment
+    private val dataSet: List<Category>,
+    private val fragment: CategoriesListFragment
 ) : RecyclerView.Adapter<CategoriesListAdapter.CategoriesViewHolder>() {
 
 

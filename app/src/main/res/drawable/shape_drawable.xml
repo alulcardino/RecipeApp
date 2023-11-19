@@ -3,7 +3,7 @@
     android:shape="rectangle">
     <corners android:radius="8px" />
     <gradient
-        android:centerColor="@color/background_favorite"
-        android:endColor="@color/background_favorite"
-        android:startColor="@color/background_favorite" />
+        android:centerColor="@color/background_favorite_color"
+        android:endColor="@color/background_favorite_color"
+        android:startColor="@color/background_favorite_color" />
 </shape>

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.romanmikhailenko.recipeapp.model.Category
 import java.io.InputStream
 import android.util.Log
+import androidx.cardview.widget.CardView
 import java.lang.Error
 import java.lang.Exception
 
@@ -19,7 +20,15 @@ class CategoriesListAdapter(
     private val dataSet: List<Category>,
     private val fragment: CategoriesListFragment
 ) : RecyclerView.Adapter<CategoriesListAdapter.CategoriesViewHolder>() {
+    interface OnItemClickListener {
+        fun onItemClick()
+    }
 
+    private var itemClickListener: OnItemClickListener? = null
+
+    fun setOnClickListener(listener: OnItemClickListener) {
+        itemClickListener = listener
+    }
 
     class CategoriesViewHolder(
         itemView: View
@@ -28,11 +37,13 @@ class CategoriesListAdapter(
         val ivCategoryImage: ImageView
         val tvCategoryTitle: TextView
         val tvCategoryDescription: TextView
+        val cvCategory: CardView
 
         init {
             ivCategoryImage = itemView.findViewById(R.id.ivCategoryItem)
             tvCategoryTitle = itemView.findViewById(R.id.tvCategoryName)
             tvCategoryDescription = itemView.findViewById(R.id.tvCategoryDescription)
+            cvCategory = itemView.findViewById(R.id.cvCategoryItem)
         }
     }
 
@@ -53,9 +64,13 @@ class CategoriesListAdapter(
         } catch (e: Exception) {
             Log.e("MyLog", e.stackTraceToString())
         }
+
         with(holder) {
             tvCategoryTitle.text = currentItem.title
             tvCategoryDescription.text = currentItem.description
+            cvCategory.setOnClickListener {
+                itemClickListener?.onItemClick()
+            }
         }
     }
 

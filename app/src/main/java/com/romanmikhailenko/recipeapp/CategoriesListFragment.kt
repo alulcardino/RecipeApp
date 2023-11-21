@@ -41,17 +41,21 @@ class CategoriesListFragment : Fragment() {
 
     private fun initRecycler() {
         val categoriesListAdapter = CategoriesListAdapter(listOfCategory, this)
-        categoriesListAdapter.setOnClickListener(object : CategoriesListAdapter.OnItemClickListener {
-            override fun onItemClick() {
-                activity?.supportFragmentManager?.commit {
-                        replace<RecipesListFragment>(R.id.mainContainer)
-                        setReorderingAllowed(true)
-                }
-            }
-        })
+        openRecipesByCategoryId(categoriesListAdapter)
         mBinding.rvCategories.apply {
             adapter = categoriesListAdapter
         }
+    }
+
+    private fun openRecipesByCategoryId(categoriesListAdapter: CategoriesListAdapter) {
+        categoriesListAdapter.setOnClickListener(object : CategoriesListAdapter.OnItemClickListener {
+            override fun onItemClick() {
+                parentFragmentManager.commit {
+                    replace<RecipesListFragment>(R.id.mainContainer)
+                    setReorderingAllowed(true)
+                }
+            }
+        })
     }
 
 }

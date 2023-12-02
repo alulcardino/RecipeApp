@@ -21,7 +21,7 @@ class CategoriesListAdapter(
     private val fragment: CategoriesListFragment
 ) : RecyclerView.Adapter<CategoriesListAdapter.CategoriesViewHolder>() {
     interface OnItemClickListener {
-        fun onItemClick()
+        fun onItemClick(categoryId: Int)
     }
 
     private var itemClickListener: OnItemClickListener? = null
@@ -34,6 +34,7 @@ class CategoriesListAdapter(
         itemView: View
 
     ) : ViewHolder(itemView) {
+
         val ivCategoryImage: ImageView
         val tvCategoryTitle: TextView
         val tvCategoryDescription: TextView
@@ -69,7 +70,7 @@ class CategoriesListAdapter(
             tvCategoryTitle.text = currentItem.title
             tvCategoryDescription.text = currentItem.description
             cvCategory.setOnClickListener {
-                itemClickListener?.onItemClick()
+                itemClickListener?.onItemClick(dataSet.indexOf(currentItem))
             }
         }
     }

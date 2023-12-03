@@ -32,8 +32,8 @@ class RecipesListFragment : Fragment() {
         categoryImageUrl = requireArguments().getString("ARG_CATEGORY_IMAGE_URL")
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         mBinding.adw.text = categoryName
     }
 

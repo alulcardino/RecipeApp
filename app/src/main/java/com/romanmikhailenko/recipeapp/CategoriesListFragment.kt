@@ -27,8 +27,7 @@ class CategoriesListFragment : Fragment() {
     )
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCategoriesListBinding.inflate(layoutInflater, container, false)
         return mBinding.root
@@ -36,35 +35,33 @@ class CategoriesListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initRecycler()
     }
 
     private fun initRecycler() {
         val categoriesListAdapter = CategoriesListAdapter(listOfCategory, this)
-        openRecipesByCategoryId(categoriesListAdapter, )
+        categoriesListAdapter.setOnClickListener(object :
+            CategoriesListAdapter.OnItemClickListener {
+            override fun onItemClick(categoryId: Int) {
+                openRecipesByCategoryId(categoryId)
+            }
+        })
         mBinding.rvCategories.adapter = categoriesListAdapter
     }
 
-    private fun openRecipesByCategoryId(
-        categoriesListAdapter: CategoriesListAdapter,
-        categoryId: Int
-    ) {
+    private fun openRecipesByCategoryId(categoryId: Int) {
         val categoryName = listOfCategory[categoryId].title
         val categoryImageUrl = listOfCategory[categoryId].imageUrl
         val bundle = bundleOf(
             Pair("ARG_CATEGORY_ID", categoryId),
             Pair("ARG_CATEGORY_NAME", categoryName),
-            Pair("ARG_CATEGORY_IMAGE_URL", categoryImageUrl))
-        categoriesListAdapter.setOnClickListener(object :
-            CategoriesListAdapter.OnItemClickListener {
-            override fun onItemClick(categoryId: Int) {
-                parentFragmentManager.commit {
-                    replace<RecipesListFragment>(R.id.mainContainer, args = bundle)
-                    setReorderingAllowed(true)
-                }
-            }
-        })
+            Pair("ARG_CATEGORY_IMAGE_URL", categoryImageUrl)
+        )
+
+        parentFragmentManager.commit {
+            replace<RecipesListFragment>(R.id.mainContainer, args = bundle)
+            setReorderingAllowed(true)
+        }
     }
 
 }

@@ -53,9 +53,9 @@ class CategoriesListFragment : Fragment() {
         val categoryName = listOfCategory[categoryId].title
         val categoryImageUrl = listOfCategory[categoryId].imageUrl
         val bundle = bundleOf(
-            Pair("ARG_CATEGORY_ID", categoryId),
-            Pair("ARG_CATEGORY_NAME", categoryName),
-            Pair("ARG_CATEGORY_IMAGE_URL", categoryImageUrl)
+            Pair(ARG_CATEGORY_ID, categoryId),
+            Pair(ARG_CATEGORY_NAME, categoryName),
+            Pair(ARG_CATEGORY_IMAGE_URL, categoryImageUrl)
         )
 
         parentFragmentManager.commit {

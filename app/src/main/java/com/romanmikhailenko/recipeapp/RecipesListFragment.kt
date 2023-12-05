@@ -8,11 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import com.romanmikhailenko.recipeapp.databinding.FragmentCategoriesListBinding
-import com.romanmikhailenko.recipeapp.databinding.FragmentFavoritesBinding
 import com.romanmikhailenko.recipeapp.databinding.FragmentRecipesListBinding
 import java.lang.Exception
 

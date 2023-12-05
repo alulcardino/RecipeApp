@@ -64,7 +64,7 @@ class RecipesListAdapter(
         with(holder) {
             tvRecipeName.text = currentItem.title
             cvRecipe.setOnClickListener {
-                itemClickListener?.onItemClick(dataset.indexOf(currentItem))
+                itemClickListener?.onItemClick(currentItem.id)
             }
         }
     }

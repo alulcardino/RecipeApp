@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.romanmikhailenko.recipeapp.databinding.FragmentRecipesListBinding
+import com.romanmikhailenko.recipeapp.model.Recipe
 import java.lang.Exception
 
 class RecipesListFragment : Fragment() {
@@ -67,8 +69,13 @@ class RecipesListFragment : Fragment() {
         val categoryName = STUB_RECIPES.burgerRecipes[recipeId].title
         val categoryImageUrl = STUB_RECIPES.burgerRecipes[recipeId].imageUrl
 
+        val recipe = STUB_RECIPES.burgerRecipes[recipeId]
+        val bundle = bundleOf(
+            Pair(ARG_RECIPE, recipe)
+        )
+
         parentFragmentManager.commit {
-            replace<RecipeFragment>(R.id.mainContainer)
+            replace<RecipeFragment>(R.id.mainContainer, args = bundle)
             setReorderingAllowed(true)
         }
     }

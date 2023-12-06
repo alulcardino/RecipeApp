@@ -1,0 +1,77 @@
+package com.romanmikhailenko.recipeapp.fragments
+
+import android.graphics.drawable.Drawable
+import android.os.Build
+import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.romanmikhailenko.recipeapp.ARG_RECIPE
+import com.romanmikhailenko.recipeapp.R
+import com.romanmikhailenko.recipeapp.adapters.IngredientsAdapter
+import com.romanmikhailenko.recipeapp.adapters.MethodAdapter
+import com.romanmikhailenko.recipeapp.databinding.FragmentRecipeBinding
+import com.romanmikhailenko.recipeapp.model.Recipe
+import java.lang.Exception
+
+
+class RecipeFragment : Fragment() {
+
+    private var _binding: FragmentRecipeBinding? = null
+    private val mBinding get() = _binding!!
+    private var recipe: Recipe? = null
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentRecipeBinding.inflate(layoutInflater, container, false)
+        return mBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        recipe = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requireArguments().getParcelable(ARG_RECIPE, Recipe::class.java)
+        } else {
+            requireArguments().getParcelable(ARG_RECIPE)
+        }
+        initRecyclers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mBinding.tvRecipeTitle.text = recipe?.title
+        try {
+            val drawable = Drawable.createFromStream(
+                this.context?.assets?.open(recipe?.imageUrl ?: "burger.png"), null
+            )
+            mBinding.ivRecipe.setImageDrawable(drawable)
+        } catch (e: Exception) {
+            Log.e("MyLog", e.stackTraceToString())
+        }
+    }
+
+
+    private fun initRecyclers() {
+        val methodAdapter = MethodAdapter(recipe?.method ?: listOf())
+        val ingredientsAdapter = IngredientsAdapter(recipe?.ingredients ?: listOf())
+        val itemDecoration = DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
+        itemDecoration.setDrawable(resources.getDrawable(R.drawable.divider))
+        with(mBinding.rvMethod) {
+            addItemDecoration(itemDecoration)
+            adapter = methodAdapter
+            layoutManager = LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
+        }
+        with(mBinding.rvIngredients) {
+            addItemDecoration(itemDecoration)
+            adapter = ingredientsAdapter
+            layoutManager = LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
+        }
+    }
+
+}

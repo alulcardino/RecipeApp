@@ -1,4 +1,4 @@
-package com.romanmikhailenko.recipeapp
+package com.romanmikhailenko.recipeapp.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,11 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.romanmikhailenko.recipeapp.ARG_CATEGORY_ID
+import com.romanmikhailenko.recipeapp.ARG_CATEGORY_IMAGE_URL
+import com.romanmikhailenko.recipeapp.ARG_CATEGORY_NAME
+import com.romanmikhailenko.recipeapp.R
+import com.romanmikhailenko.recipeapp.adapters.CategoriesListAdapter
 import com.romanmikhailenko.recipeapp.databinding.FragmentCategoriesListBinding
 import com.romanmikhailenko.recipeapp.model.Category
 

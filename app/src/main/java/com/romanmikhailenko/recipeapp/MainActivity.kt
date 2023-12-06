@@ -2,14 +2,13 @@ package com.romanmikhailenko.recipeapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.romanmikhailenko.recipeapp.R.id.mainContainer
 import com.romanmikhailenko.recipeapp.databinding.ActivityMainBinding
+import com.romanmikhailenko.recipeapp.fragments.CategoriesListFragment
+import com.romanmikhailenko.recipeapp.fragments.FavoritesFragment
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null

@@ -1,4 +1,4 @@
-package com.romanmikhailenko.recipeapp
+package com.romanmikhailenko.recipeapp.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

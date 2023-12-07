@@ -27,8 +27,8 @@ class IngredientsAdapter(
             LayoutInflater.from(parent.context).inflate(R.layout.item_ingredient, parent, false)
         )
     }
-    override fun getItemCount() : Int {
-        println()
+
+    override fun getItemCount(): Int {
         return dataset.size
     }
 

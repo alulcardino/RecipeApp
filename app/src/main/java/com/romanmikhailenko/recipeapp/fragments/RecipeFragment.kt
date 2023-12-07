@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.romanmikhailenko.recipeapp.ARG_RECIPE
 import com.romanmikhailenko.recipeapp.R
+import com.romanmikhailenko.recipeapp.RecyclerViewItemDecoration
 import com.romanmikhailenko.recipeapp.adapters.IngredientsAdapter
 import com.romanmikhailenko.recipeapp.adapters.MethodAdapter
 import com.romanmikhailenko.recipeapp.databinding.FragmentRecipeBinding
@@ -40,11 +41,11 @@ class RecipeFragment : Fragment() {
         } else {
             requireArguments().getParcelable(ARG_RECIPE)
         }
+        initUI()
         initRecyclers()
     }
 
-    override fun onResume() {
-        super.onResume()
+    private fun initUI() {
         mBinding.tvRecipeTitle.text = recipe?.title
         try {
             val drawable = Drawable.createFromStream(
@@ -56,19 +57,17 @@ class RecipeFragment : Fragment() {
         }
     }
 
-
     private fun initRecyclers() {
         val methodAdapter = MethodAdapter(recipe?.method ?: listOf())
         val ingredientsAdapter = IngredientsAdapter(recipe?.ingredients ?: listOf())
-        val itemDecoration = DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
-        itemDecoration.setDrawable(resources.getDrawable(R.drawable.divider))
+        val divider = RecyclerViewItemDecoration(this.context, R.drawable.divider)
         with(mBinding.rvMethod) {
-            addItemDecoration(itemDecoration)
+            addItemDecoration(divider)
             adapter = methodAdapter
             layoutManager = LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
         }
         with(mBinding.rvIngredients) {
-            addItemDecoration(itemDecoration)
+            addItemDecoration(divider)
             adapter = ingredientsAdapter
             layoutManager = LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
         }

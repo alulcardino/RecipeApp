@@ -12,6 +12,8 @@ class IngredientsAdapter(
     private val dataset: List<Ingredient>
 ) : RecyclerView.Adapter<IngredientsAdapter.IngredientsViewHolder>() {
 
+    private var quantity: Int = 1
+
     class IngredientsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvIngredientName: TextView
         var tvIngredientAmount: TextView
@@ -35,8 +37,26 @@ class IngredientsAdapter(
     override fun onBindViewHolder(holder: IngredientsViewHolder, position: Int) {
         val currentItem = dataset[position]
         with(holder) {
-            tvIngredientName.text = currentItem.unitOfMeasure
-            tvIngredientAmount.text = "${currentItem.description} ${currentItem.quantity}"
+            tvIngredientName.text = currentItem.description
+            tvIngredientAmount.text =
+                "${getQuantityString(currentItem.quantity)} ${currentItem.unitOfMeasure}"
         }
+    }
+
+    private fun getQuantityString(input: String): String {
+        val number = input.toDoubleOrNull()
+        if (number != null) {
+            return if (number % 1.0 != 0.0) {
+                String.format("%.1f", number * quantity)
+            } else {
+                (number * quantity).toInt().toString()
+            }
+        }
+        return ""
+    }
+
+    fun updateIngredients(progress: Int) {
+        quantity = progress
+        notifyDataSetChanged()
     }
 }

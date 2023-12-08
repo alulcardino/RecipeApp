@@ -1,19 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecipeFragment">
+    android:backgroundTint="@color/background_color"
+    tools:context=".fragments.RecipeFragment">
 
-    <TextView
-        android:id="@+id/tvRecipeName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Recipe"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="224dp">
+
+            <ImageView
+                android:id="@+id/ivRecipe"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:contentDescription="@string/title_category"
+                android:scaleType="centerCrop"
+                android:src="@drawable/burger_recipes" />
+
+            <TextView
+                android:id="@+id/tvRecipeTitle"
+                style="@style/StyleTitle20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_main"
+                android:background="@drawable/shape_title_category"
+                android:padding="10dp"
+                android:text="@string/title_category"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            style="@style/StyleRecipeSectionTitle20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_main"
+            android:layout_marginTop="@dimen/dimen_main"
+            android:text="Ингредиенты" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_main"
+            android:layout_marginTop="@dimen/dimen_main"
+            android:background="@drawable/shape_recipe"
+            android:padding="@dimen/dimen_navigation_button"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_ingredient" />
+
+
+        <TextView
+            style="@style/StyleRecipeSectionTitle20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_main"
+            android:layout_marginTop="@dimen/dimen_main"
+            android:text="Способ приготовления" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMethod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_main"
+            android:layout_marginTop="@dimen/dimen_main"
+            android:background="@drawable/shape_recipe"
+            android:padding="@dimen/dimen_navigation_button"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_method" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

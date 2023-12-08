@@ -34,4 +34,18 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/title_category_color</item>
     </style>
+
+    <style name="StyleRecipeSectionTitle20" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/montserrat_alternates_medium</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/title_section_recipe_color</item>
+    </style>
+    
+    <style name="StyleRecipeText14" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="fontFamily">@font/montserrat_medium</item>
+        <item name="color">@color/black</item>
+    </style>
 </resources>

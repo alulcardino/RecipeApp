@@ -6,4 +6,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="recipe">Рецепт</string>
+    <string name="method">Метод</string>
+    <string name="ingredient">Ингредиент</string>
+    <string name="amount">Колличество</string>
 </resources>

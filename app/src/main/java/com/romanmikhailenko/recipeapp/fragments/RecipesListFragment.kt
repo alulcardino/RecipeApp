@@ -1,4 +1,4 @@
-package com.romanmikhailenko.recipeapp
+package com.romanmikhailenko.recipeapp.fragments
 
 import STUB_RECIPES
 import android.graphics.drawable.Drawable
@@ -11,8 +11,13 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import com.romanmikhailenko.recipeapp.ARG_CATEGORY_ID
+import com.romanmikhailenko.recipeapp.ARG_CATEGORY_IMAGE_URL
+import com.romanmikhailenko.recipeapp.ARG_CATEGORY_NAME
+import com.romanmikhailenko.recipeapp.ARG_RECIPE
+import com.romanmikhailenko.recipeapp.R
+import com.romanmikhailenko.recipeapp.adapters.RecipesListAdapter
 import com.romanmikhailenko.recipeapp.databinding.FragmentRecipesListBinding
-import com.romanmikhailenko.recipeapp.model.Recipe
 import java.lang.Exception
 
 class RecipesListFragment : Fragment() {
@@ -39,7 +44,6 @@ class RecipesListFragment : Fragment() {
         initRecycler()
     }
 
-
     override fun onResume() {
         super.onResume()
         mBinding.tvCategoryTitle.text = categoryName
@@ -52,7 +56,6 @@ class RecipesListFragment : Fragment() {
             Log.e("MyLog", e.stackTraceToString())
         }
     }
-
 
     private fun initRecycler() {
         val recipesListAdapter = RecipesListAdapter(STUB_RECIPES.burgerRecipes, this)

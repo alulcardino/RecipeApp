@@ -44,15 +44,13 @@ class IngredientsAdapter(
     }
 
     private fun getQuantityString(input: String): String {
-        val number = input.toDoubleOrNull()
-        if (number != null) {
-            return if (number % 1.0 != 0.0) {
-                String.format("%.1f", number * quantity)
+        return input.toDoubleOrNull()?.let { number ->
+            if (number % 1.0 != 0.0) {
+                "%.1f".format(number * quantity)
             } else {
                 (number * quantity).toInt().toString()
             }
-        }
-        return ""
+        } ?: ""
     }
 
     fun updateIngredients(progress: Int) {

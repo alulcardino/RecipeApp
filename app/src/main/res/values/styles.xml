@@ -53,6 +53,6 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textAllCaps">true</item>
         <item name="fontFamily">@font/montserrat_medium</item>
-        <item name="color">@color/portion_color</item>
+        <item name="color">@color/portion_title_color</item>
     </style>
 </resources>

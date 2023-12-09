@@ -77,7 +77,7 @@ class RecipeFragment : Fragment() {
         mBinding.sbPortions.setOnSeekBarChangeListener (object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                 ingredientsAdapter.updateIngredients(p1)
-                mBinding.tvCountPortions.text = "Порции: $p1"
+                mBinding.tvPortionsCount.text = p1.toString()
             }
 
             override fun onStartTrackingTouch(p0: SeekBar?) {

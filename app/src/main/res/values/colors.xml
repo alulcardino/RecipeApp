@@ -15,5 +15,5 @@
     <color name="description_category_color">#666666</color>
     <color name="title_section_recipe_color">#422952</color>
     <color name="solid_recipe_color">#CBCBCB</color>
-    <color name="portion_color">#626466</color>
+    <color name="portion_title_color">#626466</color>
 </resources>

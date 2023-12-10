@@ -16,4 +16,6 @@
     <color name="title_section_recipe_color">#422952</color>
     <color name="solid_recipe_color">#CBCBCB</color>
     <color name="portion_title_color">#626466</color>
+    <color name="seekbar_progress_color">#A1A9F9</color>
+    <color name="seekbar_thumb_color">#525DC0</color>
 </resources>

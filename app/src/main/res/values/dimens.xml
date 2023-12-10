@@ -3,4 +3,5 @@
     <dimen name="dimen_main">16dp</dimen>
     <dimen name="dimen_second">8dp</dimen>
     <dimen name="dimen_navigation_button">2dp</dimen>
+    <dimen name="dimen_ingredients">2dp</dimen>
 </resources>

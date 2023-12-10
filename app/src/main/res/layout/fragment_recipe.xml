@@ -44,7 +44,44 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_main"
             android:layout_marginTop="@dimen/dimen_main"
-            android:text="Ингредиенты" />
+            android:text="@string/ingredients" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_main"
+            android:layout_marginTop="@dimen/dimen_ingredients">
+
+            <TextView
+                android:id="@+id/tvPortionsTitle"
+                style="@style/StylePortionText16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/portion" />
+
+            <TextView
+                android:id="@+id/tvPortionsCount"
+                style="@style/StylePortionText16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_ingredients"
+                android:text="1" />
+
+        </LinearLayout>
+
+
+
+        <SeekBar
+            android:id="@+id/sbPortions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/dimen_main"
+            android:layout_marginTop="@dimen/dimen_ingredients"
+            android:max="5"
+            android:min="1"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvIngredients"
@@ -64,7 +101,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_main"
             android:layout_marginTop="@dimen/dimen_main"
-            android:text="Способ приготовления" />
+            android:text="@string/method" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMethod"

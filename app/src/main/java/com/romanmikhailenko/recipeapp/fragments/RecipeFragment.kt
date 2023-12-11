@@ -10,11 +10,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.romanmikhailenko.recipeapp.ARG_RECIPE
+import com.romanmikhailenko.recipeapp.PREFERENCE_FAVORITES
+import com.romanmikhailenko.recipeapp.PREFERENCE_FAVORITES_KEY
 import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.RecyclerViewItemDecoration
 import com.romanmikhailenko.recipeapp.adapters.IngredientsAdapter
@@ -77,7 +80,7 @@ class RecipeFragment : Fragment() {
             layoutManager = LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
         }
 
-        mBinding.sbPortions.setOnSeekBarChangeListener (object : SeekBar.OnSeekBarChangeListener {
+        mBinding.sbPortions.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                 ingredientsAdapter.updateIngredients(p1)
                 mBinding.tvPortionsCount.text = p1.toString()
@@ -92,18 +95,47 @@ class RecipeFragment : Fragment() {
     }
 
     private fun initClickFavoriteButton() {
-        val emptyIcon = ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_heart)
-        val fulledIcon = ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_heart_empty)
+        val emptyIcon = ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_heart_empty)
+        val fulledIcon = ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_heart)
         with(mBinding.btnRecipeFavorite) {
             setOnClickListener {
+                val favorites = getFavorites()
+                Log.e("mylog", favorites.toString())
+                println(favorites)
+                if (favorites.contains(recipe?.id.toString())) {
+                    Toast.makeText(this.context, "Рецепт в хранилище", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this.context, "Рецепт не в хранилище", Toast.LENGTH_SHORT).show()
+                }
                 if (drawable == emptyIcon) {
+                    favorites.add(recipe?.id.toString())
+                    Toast.makeText(this.context, "Рецепт добавлен", Toast.LENGTH_SHORT).show()
                     setImageDrawable(fulledIcon)
                 } else {
+                    favorites.remove(recipe?.id.toString())
+                    Toast.makeText(this.context, "Рецепт удален", Toast.LENGTH_SHORT).show()
                     setImageDrawable(emptyIcon)
                 }
+                saveFavorites(favorites)
+
             }
         }
+    }
 
+    private fun saveFavorites(ids: Set<String>) {
+        val sharedPref = activity?.getSharedPreferences(PREFERENCE_FAVORITES, Context.MODE_PRIVATE)
+        with(sharedPref?.edit()) {
+            this?.putStringSet(PREFERENCE_FAVORITES_KEY, ids)
+            this?.apply()
+        }
+    }
+
+    private fun getFavorites(): MutableSet<String> {
+        val sharedPref = activity?.getSharedPreferences(PREFERENCE_FAVORITES, Context.MODE_PRIVATE)
+        val ids = HashSet(
+            sharedPref?.getStringSet(PREFERENCE_FAVORITES_KEY, HashSet<String>()) ?: setOf()
+        )
+        return ids
     }
 
 }

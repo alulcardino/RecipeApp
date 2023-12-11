@@ -55,4 +55,9 @@
         <item name="fontFamily">@font/montserrat_medium</item>
         <item name="color">@color/portion_title_color</item>
     </style>
+
+    <style name="StyleSeekBar" parent="Widget.AppCompat.SeekBar">
+        <item name="android:progressDrawable">@drawable/shape_seekbar_progress</item>
+        <item name="android:thumb">@drawable/shape_seekbar_thumb</item>
+    </style>
 </resources>

@@ -1,5 +1,6 @@
 package com.romanmikhailenko.recipeapp.fragments
 
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -44,6 +46,7 @@ class RecipeFragment : Fragment() {
         }
         initUI()
         initRecyclers()
+        initClickFavoriteButton()
     }
 
     private fun initUI() {
@@ -86,6 +89,21 @@ class RecipeFragment : Fragment() {
             override fun onStopTrackingTouch(p0: SeekBar?) {
             }
         })
+    }
+
+    private fun initClickFavoriteButton() {
+        val emptyIcon = ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_heart)
+        val fulledIcon = ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_heart_empty)
+        with(mBinding.btnRecipeFavorite) {
+            setOnClickListener {
+                if (drawable == emptyIcon) {
+                    setImageDrawable(fulledIcon)
+                } else {
+                    setImageDrawable(emptyIcon)
+                }
+            }
+        }
+
     }
 
 }

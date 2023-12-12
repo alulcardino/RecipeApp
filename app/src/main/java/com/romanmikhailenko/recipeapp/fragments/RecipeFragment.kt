@@ -65,7 +65,6 @@ class RecipeFragment : Fragment() {
     }
 
     private fun initRecyclers() {
-
         val methodAdapter = MethodAdapter(recipe?.method ?: listOf())
         val ingredientsAdapter = IngredientsAdapter(recipe?.ingredients ?: listOf())
         val divider = RecyclerViewItemDecoration(this.context, R.drawable.divider)
@@ -97,16 +96,18 @@ class RecipeFragment : Fragment() {
     private fun initClickFavoriteButton() {
         val emptyIcon = ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_heart_empty)
         val fulledIcon = ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_heart)
+        val favorites = getFavorites()
+        if (favorites.contains(recipe?.id.toString())) {
+            mBinding.btnRecipeFavorite.setImageDrawable(fulledIcon)
+        }
         with(mBinding.btnRecipeFavorite) {
             setOnClickListener {
-                val favorites = getFavorites()
                 if (favorites.contains(recipe?.id.toString())) {
                     favorites.remove(recipe?.id.toString())
-                    Toast.makeText(this.context, "Рецепт удален", Toast.LENGTH_SHORT).show()
                     setImageDrawable(emptyIcon)
+
                 } else {
                     favorites.add(recipe?.id.toString())
-                    Toast.makeText(this.context, "Рецепт добавлен", Toast.LENGTH_SHORT).show()
                     setImageDrawable(fulledIcon)
                 }
                 saveFavorites(favorites)

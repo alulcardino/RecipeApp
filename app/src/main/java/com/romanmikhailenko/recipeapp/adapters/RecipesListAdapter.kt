@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.fragments.RecipesListFragment
@@ -17,7 +18,7 @@ import java.lang.Exception
 
 class RecipesListAdapter(
     private val dataset: List<Recipe>,
-    private val fragment: RecipesListFragment
+    private val fragment: Fragment
 ) : RecyclerView.Adapter<RecipesListAdapter.RecipesViewHolder>() {
 
     interface OnItemClickListener {

@@ -100,24 +100,16 @@ class RecipeFragment : Fragment() {
         with(mBinding.btnRecipeFavorite) {
             setOnClickListener {
                 val favorites = getFavorites()
-                Log.e("mylog", favorites.toString())
-                println(favorites)
                 if (favorites.contains(recipe?.id.toString())) {
-                    Toast.makeText(this.context, "Рецепт в хранилище", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this.context, "Рецепт не в хранилище", Toast.LENGTH_SHORT).show()
-                }
-                if (drawable == emptyIcon) {
-                    favorites.add(recipe?.id.toString())
-                    Toast.makeText(this.context, "Рецепт добавлен", Toast.LENGTH_SHORT).show()
-                    setImageDrawable(fulledIcon)
-                } else {
                     favorites.remove(recipe?.id.toString())
                     Toast.makeText(this.context, "Рецепт удален", Toast.LENGTH_SHORT).show()
                     setImageDrawable(emptyIcon)
+                } else {
+                    favorites.add(recipe?.id.toString())
+                    Toast.makeText(this.context, "Рецепт добавлен", Toast.LENGTH_SHORT).show()
+                    setImageDrawable(fulledIcon)
                 }
                 saveFavorites(favorites)
-
             }
         }
     }

@@ -33,7 +33,7 @@
                 android:layout_margin="@dimen/dimen_main"
                 android:background="@drawable/shape_title_category"
                 android:padding="10dp"
-                android:text="@string/favorite_title"
+                android:text="@string/favorite_title_string"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -45,7 +45,7 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="@dimen/dimen_second"
             android:layout_marginBottom="@dimen/dimen_second"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="6"
             tools:listitem="@layout/item_recipe">
 

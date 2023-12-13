@@ -10,9 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.romanmikhailenko.recipeapp.ARG_RECIPE
@@ -94,8 +92,8 @@ class RecipeFragment : Fragment() {
     }
 
     private fun initClickFavoriteButton() {
-        val emptyIcon = ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_heart_empty)
-        val fulledIcon = ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_heart)
+        val emptyIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart_empty) }
+        val fulledIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart) }
         val favorites = getFavorites()
         if (favorites.contains(recipe?.id.toString())) {
             mBinding.btnRecipeFavorite.setImageDrawable(fulledIcon)
@@ -125,10 +123,9 @@ class RecipeFragment : Fragment() {
 
     private fun getFavorites(): MutableSet<String> {
         val sharedPref = activity?.getSharedPreferences(PREFERENCE_FAVORITES, Context.MODE_PRIVATE)
-        val ids = HashSet(
-            sharedPref?.getStringSet(PREFERENCE_FAVORITES_KEY, HashSet<String>()) ?: setOf()
+        return HashSet(
+            sharedPref?.getStringSet(PREFERENCE_FAVORITES_KEY, HashSet()) ?: setOf()
         )
-        return ids
     }
 
 }

@@ -15,7 +15,6 @@ import com.romanmikhailenko.recipeapp.PREFERENCE_FAVORITES
 import com.romanmikhailenko.recipeapp.PREFERENCE_FAVORITES_KEY
 import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.adapters.RecipesListAdapter
-import com.romanmikhailenko.recipeapp.databinding.FragmentCategoriesListBinding
 import com.romanmikhailenko.recipeapp.databinding.FragmentFavoritesBinding
 import com.romanmikhailenko.recipeapp.model.Recipe
 
@@ -65,10 +64,9 @@ class FavoritesFragment : Fragment() {
 
     private fun getFavorites(): MutableSet<String> {
         val sharedPref = activity?.getSharedPreferences(PREFERENCE_FAVORITES, Context.MODE_PRIVATE)
-        val ids = HashSet(
-            sharedPref?.getStringSet(PREFERENCE_FAVORITES_KEY, HashSet<String>()) ?: setOf()
+        return HashSet(
+            sharedPref?.getStringSet(PREFERENCE_FAVORITES_KEY, HashSet()) ?: setOf()
         )
-        return ids
     }
 
     private fun getFavoritesById() : List<Recipe>{

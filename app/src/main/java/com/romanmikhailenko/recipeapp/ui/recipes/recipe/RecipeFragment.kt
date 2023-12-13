@@ -1,4 +1,4 @@
-package com.romanmikhailenko.recipeapp.fragments
+package com.romanmikhailenko.recipeapp.ui.recipes.recipe
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -13,13 +13,10 @@ import android.widget.SeekBar
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.romanmikhailenko.recipeapp.ARG_RECIPE
-import com.romanmikhailenko.recipeapp.PREFERENCE_FAVORITES
-import com.romanmikhailenko.recipeapp.PREFERENCE_FAVORITES_KEY
+import com.romanmikhailenko.recipeapp.ui.ARG_RECIPE
+import com.romanmikhailenko.recipeapp.ui.PREFERENCE_FAVORITES
+import com.romanmikhailenko.recipeapp.ui.PREFERENCE_FAVORITES_KEY
 import com.romanmikhailenko.recipeapp.R
-import com.romanmikhailenko.recipeapp.RecyclerViewItemDecoration
-import com.romanmikhailenko.recipeapp.adapters.IngredientsAdapter
-import com.romanmikhailenko.recipeapp.adapters.MethodAdapter
 import com.romanmikhailenko.recipeapp.databinding.FragmentRecipeBinding
 import com.romanmikhailenko.recipeapp.model.Recipe
 import java.lang.Exception

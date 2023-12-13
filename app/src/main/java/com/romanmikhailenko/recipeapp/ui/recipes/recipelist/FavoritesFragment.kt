@@ -1,4 +1,4 @@
-package com.romanmikhailenko.recipeapp.fragments
+package com.romanmikhailenko.recipeapp.ui.recipes.recipelist
 
 import STUB_RECIPES
 import android.content.Context
@@ -10,13 +10,13 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import com.romanmikhailenko.recipeapp.ARG_RECIPE
-import com.romanmikhailenko.recipeapp.PREFERENCE_FAVORITES
-import com.romanmikhailenko.recipeapp.PREFERENCE_FAVORITES_KEY
+import com.romanmikhailenko.recipeapp.ui.ARG_RECIPE
+import com.romanmikhailenko.recipeapp.ui.PREFERENCE_FAVORITES
+import com.romanmikhailenko.recipeapp.ui.PREFERENCE_FAVORITES_KEY
 import com.romanmikhailenko.recipeapp.R
-import com.romanmikhailenko.recipeapp.adapters.RecipesListAdapter
 import com.romanmikhailenko.recipeapp.databinding.FragmentFavoritesBinding
 import com.romanmikhailenko.recipeapp.model.Recipe
+import com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeFragment
 
 class FavoritesFragment : Fragment() {
 

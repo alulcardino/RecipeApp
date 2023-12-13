@@ -1,4 +1,4 @@
-package com.romanmikhailenko.recipeapp.adapters
+package com.romanmikhailenko.recipeapp.ui.recipes.recipe
 
 import android.view.LayoutInflater
 import android.view.View

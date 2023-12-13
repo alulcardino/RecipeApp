@@ -1,4 +1,4 @@
-package com.romanmikhailenko.recipeapp.fragments
+package com.romanmikhailenko.recipeapp.ui.recipes.recipelist
 
 import STUB_RECIPES
 import android.graphics.drawable.Drawable
@@ -11,13 +11,13 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import com.romanmikhailenko.recipeapp.ARG_CATEGORY_ID
-import com.romanmikhailenko.recipeapp.ARG_CATEGORY_IMAGE_URL
-import com.romanmikhailenko.recipeapp.ARG_CATEGORY_NAME
-import com.romanmikhailenko.recipeapp.ARG_RECIPE
+import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_ID
+import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_IMAGE_URL
+import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_NAME
+import com.romanmikhailenko.recipeapp.ui.ARG_RECIPE
 import com.romanmikhailenko.recipeapp.R
-import com.romanmikhailenko.recipeapp.adapters.RecipesListAdapter
 import com.romanmikhailenko.recipeapp.databinding.FragmentRecipesListBinding
+import com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeFragment
 import java.lang.Exception
 
 class RecipesListFragment : Fragment() {

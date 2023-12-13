@@ -5,10 +5,11 @@
     <string name="title_category">Категории</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="recipe">Рецепт</string>
-    <string name="method">Способ приготовления</string>
-    <string name="ingredient">Ингредиент</string>
-    <string name="amount">Колличество</string>
-    <string name="ingredients">Ингредиенты</string>
-    <string name="portion">Порции:</string>
+    <string name="recipe_title_string">Рецепт</string>
+    <string name="method_string">Способ приготовления</string>
+    <string name="ingredient_string">Ингредиент</string>
+    <string name="amount_string">Колличество</string>
+    <string name="ingredients_string">Ингредиенты</string>
+    <string name="portion_string">Порции:</string>
+    <string name="favorite_title_string">Избранное</string>
 </resources>

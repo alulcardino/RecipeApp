@@ -1,5 +1,6 @@
 package com.romanmikhailenko.recipeapp.fragments
 
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
@@ -9,10 +10,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.romanmikhailenko.recipeapp.ARG_RECIPE
+import com.romanmikhailenko.recipeapp.PREFERENCE_FAVORITES
+import com.romanmikhailenko.recipeapp.PREFERENCE_FAVORITES_KEY
 import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.RecyclerViewItemDecoration
 import com.romanmikhailenko.recipeapp.adapters.IngredientsAdapter
@@ -44,6 +47,7 @@ class RecipeFragment : Fragment() {
         }
         initUI()
         initRecyclers()
+        initClickFavoriteButton()
     }
 
     private fun initUI() {
@@ -59,7 +63,6 @@ class RecipeFragment : Fragment() {
     }
 
     private fun initRecyclers() {
-
         val methodAdapter = MethodAdapter(recipe?.method ?: listOf())
         val ingredientsAdapter = IngredientsAdapter(recipe?.ingredients ?: listOf())
         val divider = RecyclerViewItemDecoration(this.context, R.drawable.divider)
@@ -74,7 +77,7 @@ class RecipeFragment : Fragment() {
             layoutManager = LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
         }
 
-        mBinding.sbPortions.setOnSeekBarChangeListener (object : SeekBar.OnSeekBarChangeListener {
+        mBinding.sbPortions.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                 ingredientsAdapter.updateIngredients(p1)
                 mBinding.tvPortionsCount.text = p1.toString()
@@ -86,6 +89,43 @@ class RecipeFragment : Fragment() {
             override fun onStopTrackingTouch(p0: SeekBar?) {
             }
         })
+    }
+
+    private fun initClickFavoriteButton() {
+        val emptyIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart_empty) }
+        val fulledIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart) }
+        val favorites = getFavorites()
+        if (favorites.contains(recipe?.id.toString())) {
+            mBinding.btnRecipeFavorite.setImageDrawable(fulledIcon)
+        }
+        with(mBinding.btnRecipeFavorite) {
+            setOnClickListener {
+                if (favorites.contains(recipe?.id.toString())) {
+                    favorites.remove(recipe?.id.toString())
+                    setImageDrawable(emptyIcon)
+
+                } else {
+                    favorites.add(recipe?.id.toString())
+                    setImageDrawable(fulledIcon)
+                }
+                saveFavorites(favorites)
+            }
+        }
+    }
+
+    private fun saveFavorites(ids: Set<String>) {
+        val sharedPref = activity?.getSharedPreferences(PREFERENCE_FAVORITES, Context.MODE_PRIVATE)
+        with(sharedPref?.edit()) {
+            this?.putStringSet(PREFERENCE_FAVORITES_KEY, ids)
+            this?.apply()
+        }
+    }
+
+    private fun getFavorites(): MutableSet<String> {
+        val sharedPref = activity?.getSharedPreferences(PREFERENCE_FAVORITES, Context.MODE_PRIVATE)
+        return HashSet(
+            sharedPref?.getStringSet(PREFERENCE_FAVORITES_KEY, HashSet()) ?: setOf()
+        )
     }
 
 }

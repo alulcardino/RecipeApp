@@ -1,4 +1,4 @@
-package com.romanmikhailenko.recipeapp
+package com.romanmikhailenko.recipeapp.ui.recipes.recipe
 
 import android.content.Context
 import android.graphics.Canvas

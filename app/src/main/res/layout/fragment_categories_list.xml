@@ -5,7 +5,7 @@
     android:id="@+id/CategoriesListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.CategoriesListFragment">
+    tools:context=".ui.category.CategoriesListFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"

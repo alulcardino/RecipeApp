@@ -1,4 +1,4 @@
-package com.romanmikhailenko.recipeapp.adapters
+package com.romanmikhailenko.recipeapp.ui.category
 
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -12,7 +12,6 @@ import com.romanmikhailenko.recipeapp.model.Category
 import java.io.InputStream
 import android.util.Log
 import androidx.cardview.widget.CardView
-import com.romanmikhailenko.recipeapp.fragments.CategoriesListFragment
 import com.romanmikhailenko.recipeapp.R
 import java.lang.Exception
 

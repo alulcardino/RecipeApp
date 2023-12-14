@@ -1,4 +1,4 @@
-package com.romanmikhailenko.recipeapp.adapters
+package com.romanmikhailenko.recipeapp.ui.recipes.recipelist
 
 import android.graphics.drawable.Drawable
 import android.util.Log
@@ -11,7 +11,6 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.romanmikhailenko.recipeapp.R
-import com.romanmikhailenko.recipeapp.fragments.RecipesListFragment
 import com.romanmikhailenko.recipeapp.model.Recipe
 import java.io.InputStream
 import java.lang.Exception

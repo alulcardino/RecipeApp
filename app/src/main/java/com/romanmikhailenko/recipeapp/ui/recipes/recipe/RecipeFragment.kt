@@ -93,9 +93,10 @@ class RecipeFragment : Fragment() {
         val fulledIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart) }
         val favorites = getFavorites()
         if (favorites.contains(recipe?.id.toString())) {
-            mBinding.btnRecipeFavorite.setImageDrawable(fulledIcon)
+            mBinding.ibtnRecipeFavorite.setImageDrawable(fulledIcon)
         }
-        with(mBinding.btnRecipeFavorite) {
+
+        with(mBinding.ibtnRecipeFavorite) {
             setOnClickListener {
                 if (favorites.contains(recipe?.id.toString())) {
                     favorites.remove(recipe?.id.toString())

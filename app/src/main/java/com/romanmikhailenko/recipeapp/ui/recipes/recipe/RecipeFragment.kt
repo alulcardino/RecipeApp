@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.romanmikhailenko.recipeapp.ui.ARG_RECIPE
@@ -27,6 +28,8 @@ class RecipeFragment : Fragment() {
     private var _binding: FragmentRecipeBinding? = null
     private val mBinding get() = _binding!!
     private var recipe: Recipe? = null
+    private val viewModel: RecipeViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +44,9 @@ class RecipeFragment : Fragment() {
             requireArguments().getParcelable(ARG_RECIPE, Recipe::class.java)
         } else {
             requireArguments().getParcelable(ARG_RECIPE)
+        }
+        viewModel.recipe.observe(viewLifecycleOwner) {
+            Log.i("!!!", viewModel.recipe.value?.isFavorite.toString())
         }
         initUI()
         initRecyclers()

@@ -2,7 +2,6 @@ package com.romanmikhailenko.recipeapp.ui.recipes.recipe
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,12 +13,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.romanmikhailenko.recipeapp.ui.ARG_RECIPE
-import com.romanmikhailenko.recipeapp.ui.PREFERENCE_FAVORITES
-import com.romanmikhailenko.recipeapp.ui.PREFERENCE_FAVORITES_KEY
 import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.databinding.FragmentRecipeBinding
-import com.romanmikhailenko.recipeapp.model.Recipe
+import com.romanmikhailenko.recipeapp.ui.ARG_RECIPE_ID
 import java.lang.Exception
 import java.lang.IllegalStateException
 
@@ -29,7 +25,6 @@ class RecipeFragment : Fragment() {
     private var _binding: FragmentRecipeBinding? = null
     private val mBinding
         get() = _binding ?: throw IllegalStateException("Can't load view")
-    private var recipe: Recipe? = null
     private val recipeViewModel: RecipeViewModel by viewModels()
 
     override fun onCreateView(
@@ -42,24 +37,27 @@ class RecipeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recipe = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requireArguments().getParcelable(ARG_RECIPE, Recipe::class.java)
-        } else {
-            requireArguments().getParcelable(ARG_RECIPE)
-        }
-        recipeViewModel.recipe.observe(viewLifecycleOwner) {
-            Log.i("!!!", recipeViewModel.recipe.value?.isFavorite.toString())
-        }
-        initUI()
-        initRecyclers()
-        initClickFavoriteButton()
+        recipeViewModel.loadRecipe(requireArguments().getInt(ARG_RECIPE_ID))
+        initObserver()
+
     }
 
-    private fun initUI() {
-        mBinding.tvRecipeTitle.text = recipe?.title
+    private fun initObserver() {
+        recipeViewModel.recipeState.observe(viewLifecycleOwner) {
+            with(recipeViewModel.recipeState) {
+                initUI(value)
+                initRecyclers(value)
+                initClickFavoriteButton(value)
+            }
+            Log.i("!!!", recipeViewModel.recipeState.value?.isFavorite.toString())
+        }
+    }
+
+    private fun initUI(recipeState: RecipeState?) {
+        mBinding.tvRecipeTitle.text = recipeState?.recipe?.title
         try {
             val drawable = Drawable.createFromStream(
-                this.context?.assets?.open(recipe?.imageUrl ?: "burger.png"), null
+                this.context?.assets?.open(recipeState?.recipe?.imageUrl ?: "burger.png"), null
             )
             mBinding.ivRecipe.setImageDrawable(drawable)
         } catch (e: Exception) {
@@ -67,9 +65,9 @@ class RecipeFragment : Fragment() {
         }
     }
 
-    private fun initRecyclers() {
-        val methodAdapter = MethodAdapter(recipe?.method ?: listOf())
-        val ingredientsAdapter = IngredientsAdapter(recipe?.ingredients ?: listOf())
+    private fun initRecyclers(recipeState: RecipeState?) {
+        val methodAdapter = MethodAdapter(recipeState?.recipe?.method ?: listOf())
+        val ingredientsAdapter = IngredientsAdapter(recipeState?.recipe?.ingredients ?: listOf())
         val divider = RecyclerViewItemDecoration(this.context, R.drawable.divider)
         with(mBinding.rvMethod) {
             addItemDecoration(divider)
@@ -96,42 +94,28 @@ class RecipeFragment : Fragment() {
         })
     }
 
-    private fun initClickFavoriteButton() {
+    private fun initClickFavoriteButton(recipeState: RecipeState?) {
         val emptyIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart_empty) }
         val fulledIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart) }
-        val favorites = getFavorites()
-        if (favorites.contains(recipe?.id.toString())) {
-            mBinding.ibtnRecipeFavorite.setImageDrawable(fulledIcon)
-        }
 
+        if(recipeState?.isFavorite == true) {
+            mBinding.ibtnRecipeFavorite.setImageDrawable(fulledIcon)
+        } else {
+            mBinding.ibtnRecipeFavorite.setImageDrawable(emptyIcon)
+        }
         with(mBinding.ibtnRecipeFavorite) {
             setOnClickListener {
-                if (favorites.contains(recipe?.id.toString())) {
-                    favorites.remove(recipe?.id.toString())
-                    setImageDrawable(emptyIcon)
-
+                recipeViewModel.onFavoritesClicked()
+                if(recipeState?.isFavorite == true) {
+                    mBinding.ibtnRecipeFavorite.setImageDrawable(fulledIcon)
                 } else {
-                    favorites.add(recipe?.id.toString())
-                    setImageDrawable(fulledIcon)
+                    mBinding.ibtnRecipeFavorite.setImageDrawable(emptyIcon)
                 }
-                saveFavorites(favorites)
             }
         }
     }
 
-    private fun saveFavorites(ids: Set<String>) {
-        val sharedPref = activity?.getSharedPreferences(PREFERENCE_FAVORITES, Context.MODE_PRIVATE)
-        with(sharedPref?.edit()) {
-            this?.putStringSet(PREFERENCE_FAVORITES_KEY, ids)
-            this?.apply()
-        }
-    }
 
-    private fun getFavorites(): MutableSet<String> {
-        val sharedPref = activity?.getSharedPreferences(PREFERENCE_FAVORITES, Context.MODE_PRIVATE)
-        return HashSet(
-            sharedPref?.getStringSet(PREFERENCE_FAVORITES_KEY, HashSet()) ?: setOf()
-        )
-    }
+
 
 }

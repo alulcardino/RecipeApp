@@ -15,12 +15,14 @@ import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.databinding.FragmentCategoriesListBinding
 import com.romanmikhailenko.recipeapp.model.Category
 import com.romanmikhailenko.recipeapp.ui.recipes.recipelist.RecipesListFragment
+import java.lang.IllegalStateException
 
 
 class CategoriesListFragment : Fragment() {
 
     private var _binding: FragmentCategoriesListBinding? = null
-    private val mBinding get() = _binding!!
+    private val mBinding
+        get() = _binding ?: throw IllegalStateException("Can't load view")
     private val listOfCategory: List<Category> = mutableListOf(
         Category("Рецепты всех популярных видов бургеров", 0, "burger.png", "Бургеры"),
         Category("Самые вкусные рецепты десертов специально для вас", 1, "dessert.png", "Десерты"),

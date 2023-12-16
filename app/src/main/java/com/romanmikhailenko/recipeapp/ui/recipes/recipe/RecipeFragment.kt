@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.romanmikhailenko.recipeapp.ui.ARG_RECIPE
@@ -20,13 +21,17 @@ import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.databinding.FragmentRecipeBinding
 import com.romanmikhailenko.recipeapp.model.Recipe
 import java.lang.Exception
+import java.lang.IllegalStateException
 
 
 class RecipeFragment : Fragment() {
 
     private var _binding: FragmentRecipeBinding? = null
-    private val mBinding get() = _binding!!
+    private val mBinding
+        get() = _binding ?: throw IllegalStateException("Can't load view")
     private var recipe: Recipe? = null
+    private val recipeViewModel: RecipeViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +46,9 @@ class RecipeFragment : Fragment() {
             requireArguments().getParcelable(ARG_RECIPE, Recipe::class.java)
         } else {
             requireArguments().getParcelable(ARG_RECIPE)
+        }
+        recipeViewModel.recipe.observe(viewLifecycleOwner) {
+            Log.i("!!!", recipeViewModel.recipe.value?.isFavorite.toString())
         }
         initUI()
         initRecyclers()

@@ -1,5 +1,6 @@
 package com.romanmikhailenko.recipeapp.ui.recipes.recipe
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,4 +17,9 @@ class RecipeViewModel : ViewModel() {
     private val _recipe = MutableLiveData(RecipeState())
     val recipe: MutableLiveData<RecipeState>
         get() = _recipe
+
+    init {
+        Log.i("!!!", "Init block")
+        _recipe.value = RecipeState(isFavorite = false)
+    }
 }

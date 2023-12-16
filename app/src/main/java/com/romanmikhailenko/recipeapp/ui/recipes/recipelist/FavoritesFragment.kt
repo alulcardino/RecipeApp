@@ -17,11 +17,13 @@ import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.databinding.FragmentFavoritesBinding
 import com.romanmikhailenko.recipeapp.model.Recipe
 import com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeFragment
+import java.lang.IllegalStateException
 
 class FavoritesFragment : Fragment() {
 
     private var _binding: FragmentFavoritesBinding? = null
-    private val mBinding get() = _binding!!
+    private val mBinding
+        get() = _binding ?: throw IllegalStateException("Can't load view")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

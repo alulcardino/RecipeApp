@@ -21,14 +21,16 @@ import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.databinding.FragmentRecipeBinding
 import com.romanmikhailenko.recipeapp.model.Recipe
 import java.lang.Exception
+import java.lang.IllegalStateException
 
 
 class RecipeFragment : Fragment() {
 
     private var _binding: FragmentRecipeBinding? = null
-    private val mBinding get() = _binding!!
+    private val mBinding
+        get() = _binding ?: throw IllegalStateException("Can't load view")
     private var recipe: Recipe? = null
-    private val viewModel: RecipeViewModel by viewModels()
+    private val recipeViewModel: RecipeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,8 +47,8 @@ class RecipeFragment : Fragment() {
         } else {
             requireArguments().getParcelable(ARG_RECIPE)
         }
-        viewModel.recipe.observe(viewLifecycleOwner) {
-            Log.i("!!!", viewModel.recipe.value?.isFavorite.toString())
+        recipeViewModel.recipe.observe(viewLifecycleOwner) {
+            Log.i("!!!", recipeViewModel.recipe.value?.isFavorite.toString())
         }
         initUI()
         initRecyclers()

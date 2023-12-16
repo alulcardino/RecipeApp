@@ -19,11 +19,13 @@ import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.databinding.FragmentRecipesListBinding
 import com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeFragment
 import java.lang.Exception
+import java.lang.IllegalStateException
 
 class RecipesListFragment : Fragment() {
 
     private var _binding: FragmentRecipesListBinding? = null
-    private val mBinding get() = _binding!!
+    private val mBinding
+        get() = _binding ?: throw IllegalStateException("Can't load view")
     private var categoryId: Int? = null
     private var categoryName: String? = null
     private var categoryImageUrl: String? = null

@@ -39,16 +39,13 @@ class RecipeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recipeViewModel.loadRecipe(requireArguments().getInt(ARG_RECIPE_ID))
         initObserver()
-
+        initRecyclers(recipeViewModel.recipeState.value)
+        initClickFavoriteButton(recipeViewModel.recipeState.value)
     }
 
     private fun initObserver() {
         recipeViewModel.recipeState.observe(viewLifecycleOwner) {
-            with(recipeViewModel.recipeState) {
-                initUI(value)
-                initRecyclers(value)
-                initClickFavoriteButton(value)
-            }
+            initUI(recipeViewModel.recipeState.value)
             Log.i("!!!", recipeViewModel.recipeState.value?.isFavorite.toString())
         }
     }
@@ -98,7 +95,7 @@ class RecipeFragment : Fragment() {
         val emptyIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart_empty) }
         val fulledIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart) }
 
-        if(recipeState?.isFavorite == true) {
+        if (recipeState?.isFavorite == true) {
             mBinding.ibtnRecipeFavorite.setImageDrawable(fulledIcon)
         } else {
             mBinding.ibtnRecipeFavorite.setImageDrawable(emptyIcon)
@@ -106,7 +103,7 @@ class RecipeFragment : Fragment() {
         with(mBinding.ibtnRecipeFavorite) {
             setOnClickListener {
                 recipeViewModel.onFavoritesClicked()
-                if(recipeState?.isFavorite == true) {
+                if (recipeState?.isFavorite == true) {
                     mBinding.ibtnRecipeFavorite.setImageDrawable(fulledIcon)
                 } else {
                     mBinding.ibtnRecipeFavorite.setImageDrawable(emptyIcon)
@@ -114,8 +111,6 @@ class RecipeFragment : Fragment() {
             }
         }
     }
-
-
 
 
 }

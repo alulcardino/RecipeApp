@@ -54,13 +54,13 @@ class FavoritesFragment : Fragment() {
         val categoryImageUrl = STUB_RECIPES.burgerRecipes[recipeId].imageUrl
 
         val recipe = STUB_RECIPES.burgerRecipes[recipeId]
-        val bundle = bundleOf(
-            Pair(ARG_RECIPE, recipe)
-        )
+        val bundle = bundleOf(ARG_RECIPE to recipe)
+
 
         parentFragmentManager.commit {
             replace<RecipeFragment>(R.id.mainContainer, args = bundle)
             setReorderingAllowed(true)
+            addToBackStack(null)
         }
     }
 
@@ -71,7 +71,7 @@ class FavoritesFragment : Fragment() {
         )
     }
 
-    private fun getFavoritesById() : List<Recipe>{
+    private fun getFavoritesById(): List<Recipe> {
         val ids = getFavorites().map {
             it.toInt()
         }

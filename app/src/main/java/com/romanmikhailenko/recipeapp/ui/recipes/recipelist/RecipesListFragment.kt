@@ -14,9 +14,9 @@ import androidx.fragment.app.replace
 import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_ID
 import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_IMAGE_URL
 import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_NAME
-import com.romanmikhailenko.recipeapp.ui.ARG_RECIPE
 import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.databinding.FragmentRecipesListBinding
+import com.romanmikhailenko.recipeapp.ui.ARG_RECIPE_ID
 import com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeFragment
 import java.lang.Exception
 import java.lang.IllegalStateException
@@ -71,17 +71,12 @@ class RecipesListFragment : Fragment() {
     }
 
     private fun openRecipeByRecipeId(recipeId: Int) {
-        val categoryName = STUB_RECIPES.burgerRecipes[recipeId].title
-        val categoryImageUrl = STUB_RECIPES.burgerRecipes[recipeId].imageUrl
-
-        val recipe = STUB_RECIPES.burgerRecipes[recipeId]
-        val bundle = bundleOf(
-            Pair(ARG_RECIPE, recipe)
-        )
+        val bundle = bundleOf(ARG_RECIPE_ID to recipeId)
 
         parentFragmentManager.commit {
             replace<RecipeFragment>(R.id.mainContainer, args = bundle)
             setReorderingAllowed(true)
+            addToBackStack(null)
         }
     }
 

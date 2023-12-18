@@ -10,12 +10,12 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import com.romanmikhailenko.recipeapp.ui.ARG_RECIPE
 import com.romanmikhailenko.recipeapp.ui.PREFERENCE_FAVORITES
 import com.romanmikhailenko.recipeapp.ui.PREFERENCE_FAVORITES_KEY
 import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.databinding.FragmentFavoritesBinding
 import com.romanmikhailenko.recipeapp.model.Recipe
+import com.romanmikhailenko.recipeapp.ui.ARG_RECIPE
 import com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeFragment
 import java.lang.IllegalStateException
 
@@ -54,13 +54,13 @@ class FavoritesFragment : Fragment() {
         val categoryImageUrl = STUB_RECIPES.burgerRecipes[recipeId].imageUrl
 
         val recipe = STUB_RECIPES.burgerRecipes[recipeId]
-        val bundle = bundleOf(
-            Pair(ARG_RECIPE, recipe)
-        )
+        val bundle = bundleOf(ARG_RECIPE to recipe)
+
 
         parentFragmentManager.commit {
             replace<RecipeFragment>(R.id.mainContainer, args = bundle)
             setReorderingAllowed(true)
+            addToBackStack(null)
         }
     }
 
@@ -71,7 +71,7 @@ class FavoritesFragment : Fragment() {
         )
     }
 
-    private fun getFavoritesById() : List<Recipe>{
+    private fun getFavoritesById(): List<Recipe> {
         val ids = getFavorites().map {
             it.toInt()
         }

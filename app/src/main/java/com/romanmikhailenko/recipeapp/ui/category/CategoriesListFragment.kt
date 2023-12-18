@@ -59,14 +59,17 @@ class CategoriesListFragment : Fragment() {
         val categoryName = listOfCategory[categoryId].title
         val categoryImageUrl = listOfCategory[categoryId].imageUrl
         val bundle = bundleOf(
-            Pair(ARG_CATEGORY_ID, categoryId),
-            Pair(ARG_CATEGORY_NAME, categoryName),
-            Pair(ARG_CATEGORY_IMAGE_URL, categoryImageUrl)
+            ARG_CATEGORY_ID to categoryId,
+            ARG_CATEGORY_NAME to categoryName,
+            ARG_CATEGORY_IMAGE_URL to categoryImageUrl
         )
+
 
         parentFragmentManager.commit {
             replace<RecipesListFragment>(R.id.mainContainer, args = bundle)
             setReorderingAllowed(true)
+            addToBackStack(null)
+
         }
     }
 

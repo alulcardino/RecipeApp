@@ -52,14 +52,7 @@ class RecipeFragment : Fragment() {
 
     private fun initUI(recipeState: RecipeState?) {
         mBinding.tvRecipeTitle.text = recipeState?.recipe?.title
-        try {
-            val drawable = Drawable.createFromStream(
-                this.context?.assets?.open(recipeState?.recipe?.imageUrl ?: "burger.png"), null
-            )
-            mBinding.ivRecipe.setImageDrawable(drawable)
-        } catch (e: Exception) {
-            Log.e("MyLog", e.stackTraceToString())
-        }
+        mBinding.ivRecipe.setImageDrawable(recipeState?.recipeDrawable)
     }
 
     private fun initRecyclers(recipeState: RecipeState?) {

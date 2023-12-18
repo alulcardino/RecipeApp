@@ -2,6 +2,7 @@ package com.romanmikhailenko.recipeapp.ui.recipes.recipe
 
 import android.app.Application
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -9,11 +10,13 @@ import androidx.lifecycle.MutableLiveData
 import com.romanmikhailenko.recipeapp.model.Recipe
 import com.romanmikhailenko.recipeapp.ui.PREFERENCE_FAVORITES
 import com.romanmikhailenko.recipeapp.ui.PREFERENCE_FAVORITES_KEY
+import java.lang.Exception
 
 data class RecipeState(
     var recipe: Recipe? = null,
     var portions: Int = 1,
-    var isFavorite: Boolean = false
+    var isFavorite: Boolean = false,
+    var recipeDrawable: Drawable? = null,
 )
 
 class RecipeViewModel(private val application: Application) : AndroidViewModel(application) {
@@ -31,10 +34,20 @@ class RecipeViewModel(private val application: Application) : AndroidViewModel(a
         _recipe.value = RecipeState(
             recipe = recipe,
             portions = _recipe.value?.portions ?: 1,
-            isFavorite = getFavorites().contains(recipe?.id.toString())
+            isFavorite = getFavorites().contains(recipe?.id.toString()),
+            recipeDrawable = getDrawable(recipe)
         )
+    }
 
-        // TODO(load from network)
+    private fun getDrawable(recipe: Recipe?): Drawable? {
+        return try {
+            Drawable.createFromStream(
+                application.assets?.open(recipe?.imageUrl ?: "burger.png"), null
+            )// returns a UserDefinedObject
+        } catch (e: Exception) {
+            Log.e("MyLog", e.stackTraceToString())
+            null
+        }
     }
 
     fun onFavoritesClicked() {

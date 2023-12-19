@@ -39,7 +39,6 @@ class RecipeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recipeViewModel.loadRecipe(requireArguments().getInt(ARG_RECIPE_ID))
         initObserver()
-        initRecyclers(recipeViewModel.recipeState.value)
         initClickFavoriteButton(recipeViewModel.recipeState.value)
     }
 
@@ -53,9 +52,7 @@ class RecipeFragment : Fragment() {
     private fun initUI(recipeState: RecipeState?) {
         mBinding.tvRecipeTitle.text = recipeState?.recipe?.title
         mBinding.ivRecipe.setImageDrawable(recipeState?.recipeDrawable)
-    }
 
-    private fun initRecyclers(recipeState: RecipeState?) {
         val methodAdapter = MethodAdapter(recipeState?.recipe?.method ?: listOf())
         val ingredientsAdapter = IngredientsAdapter(recipeState?.recipe?.ingredients ?: listOf())
         val divider = RecyclerViewItemDecoration(this.context, R.drawable.divider)
@@ -69,11 +66,11 @@ class RecipeFragment : Fragment() {
             adapter = ingredientsAdapter
             layoutManager = LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
         }
-
+        recipeState?.portions?.let { ingredientsAdapter.updateIngredients(it) }
         mBinding.sbPortions.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-                ingredientsAdapter.updateIngredients(p1)
                 mBinding.tvPortionsCount.text = p1.toString()
+                recipeViewModel.onChangePortions(p1)
             }
 
             override fun onStartTrackingTouch(p0: SeekBar?) {
@@ -83,6 +80,7 @@ class RecipeFragment : Fragment() {
             }
         })
     }
+
 
     private fun initClickFavoriteButton(recipeState: RecipeState?) {
         val emptyIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart_empty) }

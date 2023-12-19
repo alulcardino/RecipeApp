@@ -37,13 +37,14 @@ class RecipeViewModel(private val application: Application) : AndroidViewModel(a
             isFavorite = getFavorites().contains(recipe?.id.toString()),
             recipeDrawable = getDrawable(recipe)
         )
+        TODO("load from network")
     }
 
     private fun getDrawable(recipe: Recipe?): Drawable? {
         return try {
             Drawable.createFromStream(
                 application.assets?.open(recipe?.imageUrl ?: "burger.png"), null
-            )// returns a UserDefinedObject
+            )
         } catch (e: Exception) {
             Log.e("MyLog", e.stackTraceToString())
             null
@@ -76,7 +77,7 @@ class RecipeViewModel(private val application: Application) : AndroidViewModel(a
         val sharedPref =
             application.getSharedPreferences(PREFERENCE_FAVORITES, Context.MODE_PRIVATE)
         with(sharedPref?.edit()) {
-            this?.putStringSet(com.romanmikhailenko.recipeapp.ui.PREFERENCE_FAVORITES_KEY, ids)
+            this?.putStringSet(PREFERENCE_FAVORITES_KEY, ids)
             this?.apply()
         }
     }

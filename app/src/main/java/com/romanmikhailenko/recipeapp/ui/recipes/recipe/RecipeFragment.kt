@@ -83,6 +83,8 @@ class RecipeFragment : Fragment() {
                 recipeViewModel.onChangePortions(it)
             })
 
+            initClickFavoriteButton(recipeViewModel.recipeState.value)
+
         }
     }
 
@@ -90,11 +92,6 @@ class RecipeFragment : Fragment() {
         val emptyIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart_empty) }
         val fulledIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart) }
 
-        if (recipeState?.isFavorite == true) {
-            mBinding.ibtnRecipeFavorite.setImageDrawable(fulledIcon)
-        } else {
-            mBinding.ibtnRecipeFavorite.setImageDrawable(emptyIcon)
-        }
         with(mBinding.ibtnRecipeFavorite) {
             setOnClickListener {
                 recipeViewModel.onFavoritesClicked()

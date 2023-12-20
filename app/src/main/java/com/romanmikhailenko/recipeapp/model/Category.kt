@@ -1,8 +1,8 @@
 package com.romanmikhailenko.recipeapp.model
 
 data class Category(
-    val description: String,
     val id: Int,
+    val title: String,
+    val description: String,
     val imageUrl: String,
-    val title: String
 )

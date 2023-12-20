@@ -82,7 +82,6 @@ class RecipeFragment : Fragment() {
             mBinding.sbPortions.setOnSeekBarChangeListener(PortionSeekBarListener {
                 recipeViewModel.onChangePortions(it)
             })
-
             initClickFavoriteButton(recipeViewModel.recipeState.value)
 
         }

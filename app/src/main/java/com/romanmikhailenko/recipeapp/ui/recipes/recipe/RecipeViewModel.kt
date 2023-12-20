@@ -37,7 +37,7 @@ class RecipeViewModel(private val application: Application) : AndroidViewModel(a
             isFavorite = getFavorites().contains(recipe?.id.toString()),
             recipeDrawable = getDrawable(recipe)
         )
-        TODO("load from network")
+        //TODO("load from network")
     }
 
     private fun getDrawable(recipe: Recipe?): Drawable? {
@@ -80,5 +80,9 @@ class RecipeViewModel(private val application: Application) : AndroidViewModel(a
             this?.putStringSet(PREFERENCE_FAVORITES_KEY, ids)
             this?.apply()
         }
+    }
+
+    fun onChangePortions(p1: Int) {
+        _recipe.value = recipeState.value?.copy(portions = p1)
     }
 }

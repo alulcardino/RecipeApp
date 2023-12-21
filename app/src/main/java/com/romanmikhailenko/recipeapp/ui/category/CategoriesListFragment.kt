@@ -1,5 +1,6 @@
 package com.romanmikhailenko.recipeapp.ui.category
 
+import STUB
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,14 +24,7 @@ class CategoriesListFragment : Fragment() {
     private var _binding: FragmentCategoriesListBinding? = null
     private val mBinding
         get() = _binding ?: throw IllegalStateException("Can't load view")
-    private val listOfCategory: List<Category> = mutableListOf(
-        Category("Рецепты всех популярных видов бургеров", 0, "burger.png", "Бургеры"),
-        Category("Самые вкусные рецепты десертов специально для вас", 1, "dessert.png", "Десерты"),
-        Category("Пицца на любой вкус и цвет. Лучшая подборка для тебя", 2, "pizza.png", "Пицца"),
-        Category("Печеная, жареная, сушеная, любая рыба на твой вкус", 3, "fish.png", "Рыба"),
-        Category("От классики до экзотики: мир в одной тарелке", 4, "soup.png", "Супы"),
-        Category("Хрустящий калейдоскоп под соусом вдохновения", 5, "salad.png", "Салаты"),
-    )
+    private val listOfCategory: List<Category> = STUB.getCategories()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?

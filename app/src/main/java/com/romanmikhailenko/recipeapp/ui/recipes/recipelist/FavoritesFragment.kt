@@ -1,6 +1,6 @@
 package com.romanmikhailenko.recipeapp.ui.recipes.recipelist
 
-import STUB_RECIPES
+import STUB
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -50,10 +50,8 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun openRecipeByRecipeId(recipeId: Int) {
-        val categoryName = STUB_RECIPES.burgerRecipes[recipeId].title
-        val categoryImageUrl = STUB_RECIPES.burgerRecipes[recipeId].imageUrl
 
-        val recipe = STUB_RECIPES.burgerRecipes[recipeId]
+        val recipe = STUB.getRecipeById(recipeId)
         val bundle = bundleOf(ARG_RECIPE to recipe)
 
 
@@ -77,7 +75,7 @@ class FavoritesFragment : Fragment() {
         }
         val favorites = mutableListOf<Recipe>()
         ids.forEach {
-            favorites.add(STUB_RECIPES.burgerRecipes[it])
+            favorites.add(STUB.getRecipeById(it))
         }
         return favorites
     }

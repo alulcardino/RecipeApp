@@ -1,5 +1,6 @@
 package com.romanmikhailenko.recipeapp.ui.recipes.recipe
 
+import STUB
 import android.app.Application
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -30,11 +31,11 @@ class RecipeViewModel(private val application: Application) : AndroidViewModel(a
     }
 
     fun loadRecipe(recipeId: Int) {
-        val recipe = STUB_RECIPES.burgerRecipes.find { it.id == recipeId }
+        val recipe = STUB.getRecipeById(recipeId)
         _recipe.value = RecipeState(
             recipe = recipe,
             portions = _recipe.value?.portions ?: 1,
-            isFavorite = getFavorites().contains(recipe?.id.toString()),
+            isFavorite = getFavorites().contains(recipe.id.toString()),
             recipeDrawable = getDrawable(recipe)
         )
         //TODO("load from network")

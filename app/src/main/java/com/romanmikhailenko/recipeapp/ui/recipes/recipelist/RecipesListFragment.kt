@@ -1,6 +1,6 @@
 package com.romanmikhailenko.recipeapp.ui.recipes.recipelist
 
-import STUB_RECIPES
+import STUB
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -26,7 +26,7 @@ class RecipesListFragment : Fragment() {
     private var _binding: FragmentRecipesListBinding? = null
     private val mBinding
         get() = _binding ?: throw IllegalStateException("Can't load view")
-    private var categoryId: Int? = null
+    private var categoryId = 0
     private var categoryName: String? = null
     private var categoryImageUrl: String? = null
 
@@ -60,7 +60,7 @@ class RecipesListFragment : Fragment() {
     }
 
     private fun initRecycler() {
-        val recipesListAdapter = RecipesListAdapter(STUB_RECIPES.burgerRecipes, this)
+        val recipesListAdapter = RecipesListAdapter(STUB.getRecipesByCategoryId(categoryId), this)
         recipesListAdapter.setOnClickListener(object :
             RecipesListAdapter.OnItemClickListener {
             override fun onItemClick(recipeId: Int) {
@@ -72,7 +72,6 @@ class RecipesListFragment : Fragment() {
 
     private fun openRecipeByRecipeId(recipeId: Int) {
         val bundle = bundleOf(ARG_RECIPE_ID to recipeId)
-
         parentFragmentManager.commit {
             replace<RecipeFragment>(R.id.mainContainer, args = bundle)
             setReorderingAllowed(true)

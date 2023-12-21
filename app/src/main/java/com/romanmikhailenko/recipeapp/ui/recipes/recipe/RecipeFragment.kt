@@ -19,13 +19,14 @@ import com.romanmikhailenko.recipeapp.ui.ARG_RECIPE_ID
 import java.lang.Exception
 import java.lang.IllegalStateException
 
-class  PortionSeekBarListener(
+class PortionSeekBarListener(
     val onChangeIngredients: (Int) -> Unit
 
 ) : SeekBar.OnSeekBarChangeListener {
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
         onChangeIngredients(progress)
     }
+
     override fun onStartTrackingTouch(seekBar: SeekBar?) {
     }
 
@@ -53,7 +54,6 @@ class RecipeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recipeViewModel.loadRecipe(requireArguments().getInt(ARG_RECIPE_ID))
         initUI(recipeViewModel.recipeState.value)
-        initClickFavoriteButton(recipeViewModel.recipeState.value)
     }
 
     private fun initUI(recipeState: RecipeState?) {
@@ -66,7 +66,6 @@ class RecipeFragment : Fragment() {
             mBinding.tvRecipeTitle.text = recipeState?.recipe?.title
             mBinding.ivRecipe.setImageDrawable(recipeState?.recipeDrawable)
 
-
             val divider = RecyclerViewItemDecoration(this.context, R.drawable.divider)
             with(mBinding.rvMethod) {
                 addItemDecoration(divider)
@@ -78,30 +77,28 @@ class RecipeFragment : Fragment() {
                 adapter = ingredientsAdapter
                 layoutManager = LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
             }
-            recipeState?.portions?.let { ingredientsAdapter.updateIngredients(it) }
             mBinding.sbPortions.setOnSeekBarChangeListener(PortionSeekBarListener {
                 recipeViewModel.onChangePortions(it)
+                ingredientsAdapter.updateIngredients(it)
+                mBinding.tvPortionsCount.text = it.toString()
             })
-            initClickFavoriteButton(recipeViewModel.recipeState.value)
+            val emptyIcon =
+                context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart_empty) }
+            val fulledIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart) }
 
-        }
-    }
-
-    private fun initClickFavoriteButton(recipeState: RecipeState?) {
-        val emptyIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart_empty) }
-        val fulledIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart) }
-
-        with(mBinding.ibtnRecipeFavorite) {
-            setOnClickListener {
-                recipeViewModel.onFavoritesClicked()
-                if (recipeState?.isFavorite == true) {
-                    mBinding.ibtnRecipeFavorite.setImageDrawable(fulledIcon)
-                } else {
-                    mBinding.ibtnRecipeFavorite.setImageDrawable(emptyIcon)
+            if (recipeState?.isFavorite == true) {
+                mBinding.ibtnRecipeFavorite.setImageDrawable(fulledIcon)
+            } else {
+                mBinding.ibtnRecipeFavorite.setImageDrawable(emptyIcon)
+            }
+            with(mBinding.ibtnRecipeFavorite) {
+                setOnClickListener {
+                    recipeViewModel.onFavoritesClicked()
                 }
             }
         }
-    }
+        recipeViewModel.loadRecipe(requireArguments().getInt(ARG_RECIPE_ID))
 
+    }
 
 }

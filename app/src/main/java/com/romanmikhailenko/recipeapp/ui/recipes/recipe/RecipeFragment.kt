@@ -86,7 +86,7 @@ class RecipeFragment : Fragment() {
                 context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart_empty) }
             val fulledIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart) }
 
-            if (recipeState?.isFavorite == true) {
+            if (it.isFavorite) {
                 mBinding.ibtnRecipeFavorite.setImageDrawable(fulledIcon)
             } else {
                 mBinding.ibtnRecipeFavorite.setImageDrawable(emptyIcon)
@@ -97,7 +97,6 @@ class RecipeFragment : Fragment() {
                 }
             }
         }
-        recipeViewModel.loadRecipe(requireArguments().getInt(ARG_RECIPE_ID))
 
     }
 

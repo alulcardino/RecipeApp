@@ -63,7 +63,6 @@ class CategoriesListFragment : Fragment() {
             replace<RecipesListFragment>(R.id.mainContainer, args = bundle)
             setReorderingAllowed(true)
             addToBackStack(null)
-
         }
     }
 

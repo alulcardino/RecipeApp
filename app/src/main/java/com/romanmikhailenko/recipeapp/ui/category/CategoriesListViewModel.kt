@@ -16,5 +16,7 @@ class CategoriesListViewModel : ViewModel() {
     val categoriesState: LiveData<CategoriesListState>
         get() = _recipe
 
-    fun loadCategories() = STUB.getCategories()
+    fun loadCategories() {
+       _recipe.value?.categories = STUB.getCategories()
+    }
 }

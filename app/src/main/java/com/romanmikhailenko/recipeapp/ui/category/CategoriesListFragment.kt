@@ -15,8 +15,6 @@ import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_IMAGE_URL
 import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_NAME
 import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.databinding.FragmentCategoriesListBinding
-import com.romanmikhailenko.recipeapp.model.Category
-import com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeViewModel
 import com.romanmikhailenko.recipeapp.ui.recipes.recipelist.RecipesListFragment
 import java.lang.IllegalStateException
 
@@ -28,44 +26,40 @@ class CategoriesListFragment : Fragment() {
         get() = _binding ?: throw IllegalStateException("Can't load view")
     private val categoriesListViewModel: CategoriesListViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentCategoriesListBinding.inflate(layoutInflater, container, false)
-        return mBinding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initUI(categoriesListViewModel.categoriesState.value)
+        categoriesListViewModel.loadCategories()
+        categoriesListViewModel.categoriesState.value?.let { unitUi(it) }
     }
 
-    fun initUI(categoryListState: CategoriesListState?) {
-        categoriesListViewModel.categoriesState.observe {
-            val categoriesListAdapter = CategoriesListAdapter(categoryListState?.categories, this)
+    private fun unitUi(categoriesListState: CategoriesListState) {
+        categoriesListViewModel.categoriesState.observe(viewLifecycleOwner) {
+            val categoriesListAdapter = CategoriesListAdapter(categoriesListState.categories, this)
             categoriesListAdapter.setOnClickListener(object :
                 CategoriesListAdapter.OnItemClickListener {
                 override fun onItemClick(categoryId: Int) {
-                    val categoryName = listOfCategory[categoryId].title
-                    val categoryImageUrl = listOfCategory[categoryId].imageUrl
-                    val bundle = bundleOf(
-                        ARG_CATEGORY_ID to categoryId,
-                        ARG_CATEGORY_NAME to categoryName,
-                        ARG_CATEGORY_IMAGE_URL to categoryImageUrl
-                    )
-
-                    parentFragmentManager.commit {
-                        replace<RecipesListFragment>(R.id.mainContainer, args = bundle)
-                        setReorderingAllowed(true)
-                        addToBackStack(null)
-                    }
+                    openRecipesByCategoryId(categoryId, categoriesListState)
                 }
             })
             mBinding.rvCategories.adapter = categoriesListAdapter
+        }
+    }
 
+    private fun openRecipesByCategoryId(categoryId: Int, categoriesListState: CategoriesListState) {
+        val categoryName = categoriesListState.categories[categoryId].title
+        val categoryImageUrl = categoriesListState.categories[categoryId].imageUrl
+        val bundle = bundleOf(
+            ARG_CATEGORY_ID to categoryId,
+            ARG_CATEGORY_NAME to categoryName,
+            ARG_CATEGORY_IMAGE_URL to categoryImageUrl
+        )
+
+
+        parentFragmentManager.commit {
+            replace<RecipesListFragment>(R.id.mainContainer, args = bundle)
+            setReorderingAllowed(true)
+            addToBackStack(null)
 
         }
-
-
     }
 }

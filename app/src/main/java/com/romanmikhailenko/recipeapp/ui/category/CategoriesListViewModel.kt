@@ -1,5 +1,6 @@
 package com.romanmikhailenko.recipeapp.ui.category
 
+import STUB
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,5 +16,5 @@ class CategoriesListViewModel : ViewModel() {
     val categoriesState: LiveData<CategoriesListState>
         get() = _recipe
 
-    fun getCategories(): List<Category> = getCategories()
+    fun loadCategories() = STUB.getCategories()
 }

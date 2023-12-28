@@ -2,13 +2,9 @@ package com.romanmikhailenko.recipeapp.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.add
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
-import com.romanmikhailenko.recipeapp.R.id.mainContainer
+import androidx.navigation.fragment.NavHostFragment
+import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.databinding.ActivityMainBinding
-import com.romanmikhailenko.recipeapp.ui.category.CategoriesListFragment
-import com.romanmikhailenko.recipeapp.ui.recipes.recipelist.FavoritesFragment
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
@@ -19,24 +15,15 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-        supportFragmentManager.commit {
-            setReorderingAllowed(true)
-            add<CategoriesListFragment>(mainContainer)
-            addToBackStack(null)
-        }
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = navHostFragment.navController
 
         mBinding.btnCategory.setOnClickListener {
-            supportFragmentManager.commit {
-                replace<CategoriesListFragment>(mainContainer)
-                setReorderingAllowed(true)
-            }
+            navController.navigate(R.id.categoriesListFragment)
         }
 
         mBinding.btnFavorite.setOnClickListener {
-            supportFragmentManager.commit {
-                replace<FavoritesFragment>(mainContainer)
-                setReorderingAllowed(true)
-            }
+            navController.navigate(R.id.favoritesFragment)
         }
     }
 }

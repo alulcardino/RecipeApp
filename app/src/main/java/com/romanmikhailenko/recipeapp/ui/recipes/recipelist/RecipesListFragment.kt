@@ -13,6 +13,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_ID
 import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_IMAGE_URL
 import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_NAME
@@ -73,12 +74,6 @@ class RecipesListFragment : Fragment() {
 
     private fun openRecipeByRecipeId(recipeId: Int) {
         val bundle = bundleOf(ARG_RECIPE_ID to recipeId)
-        parentFragmentManager.commit {
-            replace<RecipeFragment>(R.id.mainContainer, args = bundle)
-            setReorderingAllowed(true)
-            addToBackStack(null)
-        }
+        findNavController().navigate(R.id.recipeFragment, args = bundle)
     }
-
-
 }

@@ -60,7 +60,7 @@ class RecipeFragment : Fragment() {
         val methodAdapter = MethodAdapter(recipeState?.recipe?.method ?: listOf())
         val ingredientsAdapter = IngredientsAdapter(recipeState?.recipe?.ingredients ?: listOf())
 
-        recipeViewModel.recipeState.observe(viewLifecycleOwner) {
+        recipeViewModel.recipeState.observe(viewLifecycleOwner) { state ->
             Log.i("!!!", recipeViewModel.recipeState.value?.isFavorite.toString())
 
             mBinding.tvRecipeTitle.text = recipeState?.recipe?.title
@@ -86,7 +86,7 @@ class RecipeFragment : Fragment() {
                 context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart_empty) }
             val fulledIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_heart) }
 
-            if (it.isFavorite) {
+            if (state.isFavorite) {
                 mBinding.ibtnRecipeFavorite.setImageDrawable(fulledIcon)
             } else {
                 mBinding.ibtnRecipeFavorite.setImageDrawable(emptyIcon)

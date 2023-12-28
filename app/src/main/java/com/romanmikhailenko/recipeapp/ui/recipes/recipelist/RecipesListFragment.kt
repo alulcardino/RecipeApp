@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import androidx.fragment.app.viewModels
 import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_ID
 import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_IMAGE_URL
 import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_NAME
@@ -26,9 +28,8 @@ class RecipesListFragment : Fragment() {
     private var _binding: FragmentRecipesListBinding? = null
     private val mBinding
         get() = _binding ?: throw IllegalStateException("Can't load view")
-    private var categoryId = 0
-    private var categoryName: String? = null
-    private var categoryImageUrl: String? = null
+    private val recipesListViewModel: RecipesListViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,27 +41,27 @@ class RecipesListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        categoryId = requireArguments().getInt(ARG_CATEGORY_ID)
-        categoryName = requireArguments().getString(ARG_CATEGORY_NAME)
-        categoryImageUrl = requireArguments().getString(ARG_CATEGORY_IMAGE_URL)
-        initRecycler()
+        val categoryName = requireArguments().getString(ARG_CATEGORY_NAME) ?: ""
+        val categoryImageUrl = requireArguments().getString(ARG_CATEGORY_IMAGE_URL) ?: ""
+        recipesListViewModel.loadRecipes(
+            requireArguments().getInt(ARG_CATEGORY_ID),
+            categoryName,
+            categoryImageUrl,
+        )
+        recipesListViewModel.recipesState.value?.let { unitUI(it) }
     }
 
-    override fun onResume() {
-        super.onResume()
-        mBinding.tvCategoryTitle.text = categoryName
-        try {
-            val drawable = Drawable.createFromStream(
-                this.context?.assets?.open(categoryImageUrl ?: "burger.png"), null
-            )
-            mBinding.ivCategoryTitle.setImageDrawable(drawable)
-        } catch (e: Exception) {
-            Log.e("MyLog", e.stackTraceToString())
+
+    private fun unitUI(state: RecipesListState) {
+        recipesListViewModel.recipesState.observe(viewLifecycleOwner) {
+            mBinding.tvCategoryTitle.text = state.categoryName
+            mBinding.ivCategoryTitle.setImageDrawable(state.categoryImageUrl)
+            initRecycler(state)
         }
     }
 
-    private fun initRecycler() {
-        val recipesListAdapter = RecipesListAdapter(STUB.getRecipesByCategoryId(categoryId), this)
+    private fun initRecycler(state: RecipesListState) {
+        val recipesListAdapter = RecipesListAdapter(state.recipes, this)
         recipesListAdapter.setOnClickListener(object :
             RecipesListAdapter.OnItemClickListener {
             override fun onItemClick(recipeId: Int) {

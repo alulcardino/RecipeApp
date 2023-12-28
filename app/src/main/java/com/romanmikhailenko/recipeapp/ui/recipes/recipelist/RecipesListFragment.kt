@@ -52,7 +52,7 @@ class RecipesListFragment : Fragment() {
     }
 
 
-    fun unitUI(state: RecipesListState) {
+    private fun unitUI(state: RecipesListState) {
         recipesListViewModel.recipesState.observe(viewLifecycleOwner) {
             mBinding.tvCategoryTitle.text = state.categoryName
             mBinding.ivCategoryTitle.setImageDrawable(state.categoryImageUrl)

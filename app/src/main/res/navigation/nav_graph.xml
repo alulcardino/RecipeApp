@@ -31,6 +31,10 @@
         <action
             android:id="@+id/action_recipeFragment_to_recipesListFragment"
             app:destination="@id/recipesListFragment" />
+        <argument
+            android:name="recipeId"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
@@ -42,5 +46,6 @@
         <action
             android:id="@+id/action_favoritesFragment_to_categoriesListFragment"
             app:destination="@id/categoriesListFragment" />
+
     </fragment>
 </navigation>

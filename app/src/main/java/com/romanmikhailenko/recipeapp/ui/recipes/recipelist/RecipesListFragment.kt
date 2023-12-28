@@ -21,6 +21,7 @@ import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.databinding.FragmentRecipesListBinding
 import com.romanmikhailenko.recipeapp.ui.ARG_RECIPE_ID
 import com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeFragment
+import com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeFragmentDirections
 import java.lang.Exception
 import java.lang.IllegalStateException
 
@@ -52,7 +53,6 @@ class RecipesListFragment : Fragment() {
         recipesListViewModel.recipesState.value?.let { unitUI(it) }
     }
 
-
     private fun unitUI(state: RecipesListState) {
         recipesListViewModel.recipesState.observe(viewLifecycleOwner) {
             mBinding.tvCategoryTitle.text = state.categoryName
@@ -73,7 +73,7 @@ class RecipesListFragment : Fragment() {
     }
 
     private fun openRecipeByRecipeId(recipeId: Int) {
-        val bundle = bundleOf(ARG_RECIPE_ID to recipeId)
-        findNavController().navigate(R.id.recipeFragment, args = bundle)
+        val action = RecipesListFragmentDirections.actionRecipesListFragmentToRecipeFragment(recipeId)
+        findNavController().navigate(action)
     }
 }

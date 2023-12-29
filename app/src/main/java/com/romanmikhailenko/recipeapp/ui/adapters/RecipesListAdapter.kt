@@ -1,4 +1,4 @@
-package com.romanmikhailenko.recipeapp.ui.recipes.recipelist
+package com.romanmikhailenko.recipeapp.ui.adapters
 
 import android.graphics.drawable.Drawable
 import android.util.Log

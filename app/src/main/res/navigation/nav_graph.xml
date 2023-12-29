@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/recipesListFragment"
-        android:name="com.romanmikhailenko.recipeapp.ui.recipes.recipelist.RecipesListFragment"
+        android:name="com.romanmikhailenko.recipeapp.ui.fragments.RecipesListFragment"
         android:label="fragment_recipes_list"
         tools:layout="@layout/fragment_recipes_list" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/categoriesListFragment"
-        android:name="com.romanmikhailenko.recipeapp.ui.category.CategoriesListFragment"
+        android:name="com.romanmikhailenko.recipeapp.ui.fragments.CategoriesListFragment"
         android:label="fragment_categories_list"
         tools:layout="@layout/fragment_categories_list" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/recipeFragment"
-        android:name="com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeFragment"
+        android:name="com.romanmikhailenko.recipeapp.ui.fragments.RecipeFragment"
         android:label="fragment_recipe"
         tools:layout="@layout/fragment_recipe" >
         <action
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.romanmikhailenko.recipeapp.ui.recipes.recipelist.FavoritesFragment"
+        android:name="com.romanmikhailenko.recipeapp.ui.fragments.FavoritesFragment"
         android:label="FavoritesFragment" >
         <action
             android:id="@+id/action_favoritesFragment_to_recipeFragment"

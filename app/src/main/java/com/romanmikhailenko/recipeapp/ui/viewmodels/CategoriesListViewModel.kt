@@ -1,11 +1,10 @@
-package com.romanmikhailenko.recipeapp.ui.category
+package com.romanmikhailenko.recipeapp.ui.viewmodels
 
 import STUB
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.romanmikhailenko.recipeapp.model.Category
-import com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeState
 
 data class CategoriesListState(
     var categories: List<Category> = listOf()

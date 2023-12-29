@@ -1,4 +1,4 @@
-package com.romanmikhailenko.recipeapp.ui.recipes.recipelist
+package com.romanmikhailenko.recipeapp.ui.viewmodels
 
 import android.app.Application
 import android.content.Context
@@ -6,8 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.romanmikhailenko.recipeapp.model.Recipe
-import com.romanmikhailenko.recipeapp.ui.PREFERENCE_FAVORITES
-import com.romanmikhailenko.recipeapp.ui.PREFERENCE_FAVORITES_KEY
+import com.romanmikhailenko.recipeapp.utils.PREFERENCE_FAVORITES
+import com.romanmikhailenko.recipeapp.utils.PREFERENCE_FAVORITES_KEY
 
 data class FavoriteState(
     var recipes: List<Recipe> = listOf()

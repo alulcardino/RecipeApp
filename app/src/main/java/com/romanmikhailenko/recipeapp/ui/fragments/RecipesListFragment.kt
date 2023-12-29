@@ -1,30 +1,17 @@
-package com.romanmikhailenko.recipeapp.ui.recipes.recipelist
+package com.romanmikhailenko.recipeapp.ui.fragments
 
-import STUB
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_ID
-import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_IMAGE_URL
-import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_NAME
-import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.databinding.FragmentRecipesListBinding
-import com.romanmikhailenko.recipeapp.ui.ARG_RECIPE_ID
-import com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeFragment
-import com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeFragmentArgs
-import com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeFragmentDirections
-import java.lang.Exception
+import com.romanmikhailenko.recipeapp.ui.adapters.RecipesListAdapter
+import com.romanmikhailenko.recipeapp.ui.viewmodels.RecipesListState
+import com.romanmikhailenko.recipeapp.ui.viewmodels.RecipesListViewModel
 import java.lang.IllegalStateException
 
 class RecipesListFragment : Fragment() {

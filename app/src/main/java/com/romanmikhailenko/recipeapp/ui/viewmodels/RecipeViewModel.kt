@@ -1,4 +1,4 @@
-package com.romanmikhailenko.recipeapp.ui.recipes.recipe
+package com.romanmikhailenko.recipeapp.ui.viewmodels
 
 import STUB
 import android.app.Application
@@ -9,8 +9,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.romanmikhailenko.recipeapp.model.Recipe
-import com.romanmikhailenko.recipeapp.ui.PREFERENCE_FAVORITES
-import com.romanmikhailenko.recipeapp.ui.PREFERENCE_FAVORITES_KEY
+import com.romanmikhailenko.recipeapp.utils.PREFERENCE_FAVORITES
+import com.romanmikhailenko.recipeapp.utils.PREFERENCE_FAVORITES_KEY
 import java.lang.Exception
 
 data class RecipeState(

@@ -1,4 +1,4 @@
-package com.romanmikhailenko.recipeapp.ui
+package com.romanmikhailenko.recipeapp.utils
 
 const val ARG_CATEGORY_ID = "ARG_CATEGORY_ID"
 const val ARG_CATEGORY_NAME = "ARG_CATEGORY_NAME"

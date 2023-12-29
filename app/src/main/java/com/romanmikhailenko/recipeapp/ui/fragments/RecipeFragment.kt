@@ -1,7 +1,5 @@
-package com.romanmikhailenko.recipeapp.ui.recipes.recipe
+package com.romanmikhailenko.recipeapp.ui.fragments
 
-import android.content.Context
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -16,8 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.databinding.FragmentRecipeBinding
-import com.romanmikhailenko.recipeapp.ui.ARG_RECIPE_ID
-import java.lang.Exception
+import com.romanmikhailenko.recipeapp.ui.adapters.IngredientsAdapter
+import com.romanmikhailenko.recipeapp.ui.adapters.MethodAdapter
+import com.romanmikhailenko.recipeapp.ui.viewmodels.RecipeState
+import com.romanmikhailenko.recipeapp.ui.viewmodels.RecipeViewModel
+import com.romanmikhailenko.recipeapp.ui.adapters.RecyclerViewItemDecoration
 import java.lang.IllegalStateException
 
 class PortionSeekBarListener(

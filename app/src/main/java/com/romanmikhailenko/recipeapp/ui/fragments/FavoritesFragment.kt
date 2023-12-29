@@ -1,25 +1,16 @@
-package com.romanmikhailenko.recipeapp.ui.recipes.recipelist
+package com.romanmikhailenko.recipeapp.ui.fragments
 
-import STUB
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.romanmikhailenko.recipeapp.ui.PREFERENCE_FAVORITES
-import com.romanmikhailenko.recipeapp.ui.PREFERENCE_FAVORITES_KEY
-import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.databinding.FragmentFavoritesBinding
-import com.romanmikhailenko.recipeapp.model.Recipe
-import com.romanmikhailenko.recipeapp.ui.ARG_RECIPE
-import com.romanmikhailenko.recipeapp.ui.ARG_RECIPE_ID
-import com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeFragment
+import com.romanmikhailenko.recipeapp.ui.viewmodels.FavoriteState
+import com.romanmikhailenko.recipeapp.ui.viewmodels.FavoriteViewModel
+import com.romanmikhailenko.recipeapp.ui.adapters.RecipesListAdapter
 import java.lang.IllegalStateException
 
 class FavoritesFragment : Fragment() {

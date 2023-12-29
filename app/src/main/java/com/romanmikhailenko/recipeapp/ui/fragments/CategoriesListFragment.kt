@@ -1,22 +1,17 @@
-package com.romanmikhailenko.recipeapp.ui.category
+package com.romanmikhailenko.recipeapp.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_ID
-import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_IMAGE_URL
-import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_NAME
-import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.databinding.FragmentCategoriesListBinding
 import com.romanmikhailenko.recipeapp.model.Category
-import com.romanmikhailenko.recipeapp.ui.recipes.recipelist.RecipesListFragment
+import com.romanmikhailenko.recipeapp.ui.adapters.CategoriesListAdapter
+import com.romanmikhailenko.recipeapp.ui.viewmodels.CategoriesListState
+import com.romanmikhailenko.recipeapp.ui.viewmodels.CategoriesListViewModel
 import java.lang.IllegalStateException
 
 

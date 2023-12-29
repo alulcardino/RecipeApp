@@ -1,4 +1,4 @@
-package com.romanmikhailenko.recipeapp.ui.recipes.recipelist
+package com.romanmikhailenko.recipeapp.ui.viewmodels
 
 import STUB
 import android.app.Application
@@ -7,10 +7,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.romanmikhailenko.recipeapp.model.Category
 import com.romanmikhailenko.recipeapp.model.Recipe
-import com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeState
 import java.lang.Exception
 
 data class RecipesListState(

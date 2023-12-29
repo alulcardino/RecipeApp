@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    tools:context=".ui.recipes.recipelist.RecipesListFragment"
+    tools:context=".ui.fragments.RecipesListFragment"
     tools:layout=''>
 
     <androidx.appcompat.widget.LinearLayoutCompat

@@ -14,6 +14,7 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_ID
 import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_IMAGE_URL
 import com.romanmikhailenko.recipeapp.ui.ARG_CATEGORY_NAME
@@ -21,6 +22,7 @@ import com.romanmikhailenko.recipeapp.R
 import com.romanmikhailenko.recipeapp.databinding.FragmentRecipesListBinding
 import com.romanmikhailenko.recipeapp.ui.ARG_RECIPE_ID
 import com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeFragment
+import com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeFragmentArgs
 import com.romanmikhailenko.recipeapp.ui.recipes.recipe.RecipeFragmentDirections
 import java.lang.Exception
 import java.lang.IllegalStateException
@@ -31,6 +33,8 @@ class RecipesListFragment : Fragment() {
     private val mBinding
         get() = _binding ?: throw IllegalStateException("Can't load view")
     private val recipesListViewModel: RecipesListViewModel by viewModels()
+    private val recipesListFragmentArgs : RecipesListFragmentArgs by navArgs()
+
 
 
     override fun onCreateView(
@@ -43,12 +47,10 @@ class RecipesListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val categoryName = requireArguments().getString(ARG_CATEGORY_NAME) ?: ""
-        val categoryImageUrl = requireArguments().getString(ARG_CATEGORY_IMAGE_URL) ?: ""
         recipesListViewModel.loadRecipes(
-            requireArguments().getInt(ARG_CATEGORY_ID),
-            categoryName,
-            categoryImageUrl,
+            recipesListFragmentArgs.category.id,
+            recipesListFragmentArgs.category.title,
+            recipesListFragmentArgs.category.imageUrl,
         )
         recipesListViewModel.recipesState.value?.let { unitUI(it) }
     }

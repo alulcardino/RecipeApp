@@ -56,12 +56,15 @@ class CategoriesListFragment : Fragment() {
     private fun openRecipesByCategoryId(categoryId: Int, categoriesListState: CategoriesListState) {
         val categoryName = categoriesListState.categories[categoryId].title
         val categoryImageUrl = categoriesListState.categories[categoryId].imageUrl
-        val bundle = bundleOf(
-            ARG_CATEGORY_ID to categoryId,
-            ARG_CATEGORY_NAME to categoryName,
-            ARG_CATEGORY_IMAGE_URL to categoryImageUrl
-        )
 
-        findNavController().navigate(R.id.recipesListFragment, args = bundle)
+        val action = CategoriesListFragmentDirections.actionCategoriesListFragmentToRecipesListFragment(
+            Category(
+                categoryId,
+                categoryName,
+                "",
+                categoryImageUrl
+            )
+        )
+        findNavController().navigate(action)
     }
 }
